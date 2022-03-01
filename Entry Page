@@ -1,0 +1,13 @@
+from sys import exit 
+import mysql.connector as sql
+conn=sql.connect(host='localhost',user='root',passwd='',database='project')
+if conn.is_connected():
+  print('successfully connected')
+c1=conn.cursor()
+print('---------------------------------------------')
+print("COVID-19 PATIENT MANAGEMENT SYSTEM")
+print('---------------------------------------------')
+print('WELCOME!')
+print("1.LOGIN")
+print("2.EXIT")
+choice=int(input("ENTER YOUR CHOICE:"))
