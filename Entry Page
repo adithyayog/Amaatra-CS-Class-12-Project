@@ -19,26 +19,19 @@ if choice==1:
   
     print("WELCOME TO HOSPITAL")
     print("successfully connected")
-    print('1.RegisteringPatient details')
-    print('2.RegisteringDoctor details')
-    print('3.RegisteringWorker details')
-    print("4.total patient details")
-    print("5.total doctor details")
-    print("6.total worker details")
-    print('7.Patient detail')
-    print('8.Doctor detail')
-    print('9.Worker detail')
-    print('10.Exit')
+    print('1.List Hospitals')
+    print('2.Register Hospital')
+    print('3.Exit')
     choice=int(input('ENTER YOUR CHOICE:'))
+   
     if choice==1:
-      p_name=input('Enter Patient Name:')
-      p_age=int(input('Enter Age:'))
-      p_problems=input('Enter the Problem/Disease:')
-      p_phono=int(input('Enter Phone number:'))
-      sql_insert="insert into patient_details values(""'"+p_name+"',"+str(p_age)+",'"+p_problems+"',"+str(p_phono)+")"
-      c1.execute(sql_insert)
-      print('SUCCESSFULLY REGISTERED')
-      conn.commit()
+      c1.execute(select * from database)
+      r = c1.fetchall()
+      for i in r:
+        print(i)
+      hosp=int(input("Choose a hospital to view details (1-15):"))
+      
+      
       
     elif choice==2:
       d_name=input('Enter Doctor Name:')
@@ -105,7 +98,7 @@ if choice==1:
       for i in w:
         print(i)
         
-    elif choice==10:
+    elif choice==3:
       exit()
       break
   else:
