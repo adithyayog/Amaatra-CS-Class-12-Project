@@ -14,9 +14,9 @@ print('---------------------------------------------')
 
 c1.execute('create table patient_details(Name varchar(30), Age int, Hospital varchar(30), Services varchar(100), Number varchar(15), Timing date')
 conn.commit()
-c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15))
+c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15)')
 conn.commit()
-c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone_Number varchar(15))
+c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone_Number varchar(15)')
 conn.commit()
 
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
@@ -112,11 +112,12 @@ def hospitals():
 def patient_mode():        
       p_name=input('Enter Patient Name:')
       p_age=int(input('Enter Age:'))
+      p_hospital=str(input("Enter hospial name from list")
       p_problems=input('Enter the services requested:')
       p_phono=int(input('Enter Phone number:'))
       p_datetime=eval(input('Enter appointment date and time in dd-mm-yy hh:mm:00 xm format'))
       p_hospital=hosp
-      sql_insert="insert into patient_details(Name, Age, Services, Number) values(""'"+p_name+"',"+str(p_age)+",'"+p_problems+"',"+str(p_phono)+"',"+p_hospital+")"
+      sql_insert="insert into patient_details(Name, Age, Hospital, Services, Number) values(""'"+p_name+"',"+str(p_age)+",'+",'+p_hospital+","+"+p_problems+"',"+str(p_phono)")"
       c1.execute(sql_insert)
       conn.commit()
       c1.execute("insert into patient_details("Timing") values(convert("datetime"+","+ "p_datetime"+","+ "5")")
@@ -156,8 +157,21 @@ def admin_mode():
            
            
         elif ch==2:
-           
-           
+           removeit=str(input("Enter Name of hospital to remove from list"))
+           c1.execute("count(*) from hospitals where name=","+"removeit"")
+           num = c1.fetchall()
+           if num>0:
+               c1.execute("select * from hospitals where name=","+"removeit"")
+               r=c1.fetachall()
+               for x in r:
+                   print(x)
+               confirm = print("Confirm deletion of record (Y/N)?")
+               if confirm=='Y':
+                   c1.execute("delete * from hospital where name=","+"removeit"")
+               else:
+                   admin_mode()
+           else:
+               print("Error! No matching records found.")           
         elif ch==3:
            d_name=input('Enter Doctor Name:')
            d_age=int(input('Enter Age:'))
@@ -179,7 +193,7 @@ def admin_mode():
            print('successfully registered')
            conn.commit()
         elif ch==5:
-           removeit=str(input("Enter phone number of doctor to remove"))
+           d_phono=str(input("Enter phone number of doctor to remove"))
            c1.execute("count(*) from doctor_details where Phone_Number=+"d_phono"")
            num = c1.fetchall()
            if num>0:
@@ -195,7 +209,7 @@ def admin_mode():
            else:
                print("Error! No matching records found.")
         elif ch==6:
-           removeit=str(input("Enter phone number of worker to remove"))
+           w_phono=str(input("Enter phone number of worker to remove"))
            c1.execute("count(*) from worker_details where Phone_Number=+"w_phono"")
            num = c1.fetchall()
            if num>0:
@@ -215,10 +229,19 @@ def admin_mode():
            hospitals()
         elif ch==8:
            c1.execute("select * from patient_details group by hospital")
+           r=c1.fetchall()
+           for x in r:
+               print(x)
         elif ch==9:
            c1.execute("select * from doctor_details group by hospital")
+           r=c1.fetchall()
+           for x in r:
+               print(x)
         elif ch==10:
            c1.execute("select * from worker_details group by hospital")
+           r=c1.fetchall()
+           for x in r:
+               print(x)
         elif ch==11:
            main()
         else:
