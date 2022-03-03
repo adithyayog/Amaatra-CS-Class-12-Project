@@ -11,11 +11,8 @@ print('---------------------------------------------')
 print("COVID-19 PATIENT MANAGEMENT SYSTEM")
 print('---------------------------------------------')
 
-import mysql.connector as sql
-conn=sql.connect(host='localhost',user='root',passwd='amaatra',database='project')
-if conn.is_connected():
-      print('successfully connected')
-c1=conn.cursor()
+c1.execute('create table patient_details(Name varchar(30), Age int, Services varchar(100), Number varchar(15), Timing date')
+
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
 conn.commit()
 c1.execute('insert into hospitals values(1, "Manipal Hospital", "HAL Old Airport Rd", "Marathahalli")')
