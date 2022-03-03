@@ -183,31 +183,24 @@ def welcome():
     print("3.EXIT")
     choice=int(input("ENTER YOUR CHOICE:"))
     if choice==1:
-        us1=str(input("enter user name:"))
-        pwd1=str(input("enter the password:"))
-        f=open("logindata.dat", "wb+")
-        for i in range(1,2):
-            try:
-                rec=pickle.load(f)
-                if(rec["username"]==pwd1):
-                   for i in rec:
-                       print(i)
-                       main()
-                   
+        with open("logindata.csv", "r") as f:
+            us1=str(input("enter user name:"))
+            pwd1=str(input("enter the password:"))
+            readit=csv.reader(f)
+            for row in readit:
+                if row == [us1, pwd1]:
+                    print("login successful")
+                    mains()
                 else:
                     print('Wrong username and/or password')
                     welcome()
-            except EOFError:
-                break
-        f.close()
     if choice==2:
-        us1=str(input("enter user name:"))
-        pwd1=str(input("enter the password:"))
-        rec={"username": us1, "password": pwd1}
-        f=open("student.dat", "ab")
-        pickle.dump(rec,f)
-        f.close()
-        welcome()
+        with open("logindata.csv", "a") as f:
+            us1=str(input("enter user name:"))
+            pwd1=str(input("enter the password:"))
+            writeit=csv.writer(f)
+            writeit.writerow([us1, pwd1])
+            welcome()
     if choice==3:
         exit()
 
