@@ -3,6 +3,7 @@ import datetime
 import mysql.connector as sql
 import pickle
 import csv
+
 conn=sql.connect(host='localhost',user='root',passwd='amaatra',database='project')
 if conn.is_connected():
     print('successfully connected')
@@ -82,70 +83,27 @@ c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 
 conn.commit()
 
 def hospitals():
-    c1.execute('select * from hospital')
+    c1.execute('select * from hospitals')
     r = c1.fetchall()
     for i in r:
         print(i)
     global hosp=int(input("Choose a hospital to view details (1-15):"))
-    if hosp==1:
-        hosp='manipal'
-        c1.execute('select * from manipal')
-    if hosp==2:
-        hosp='sakra'
-        c1.execute('select * from sakra')
-    if hosp==3:
-        hosp='columbia'
-        c1.execute('select * from columbia')
-    if hosp==4:
-        hosp='narayana'
-        c1.execute('select * from narayana')
-    if hosp==5:
-        hosp='blossom'
-        c1.execute('select * from blossom')
-    if hosp==6:
-        hosp='fortis'
-        c1.execute('select * from fortis')
-    if hosp==7:
-        hosp='apollo'
-        c1.execute('select * from apollo')
-    if hosp==8:
-        hosp='aster'
-        c1.execute('select * from aster')
-    if hosp==9:
-        hosp='sparsh'
-        c1.execute('select * from sparsh')
-    if hosp==10:
-        hosp='bgs'
-        c1.execute('select * from bgs')
-    if hosp==11:
-        hosp='sagar'
-        c1.execute('select * from sagar')
-    if hosp==12:
-        hosp='ramaiah'
-        c1.execute('select * from ramaiah')
-    if hosp==13:
-        hosp='blrbaptist'
-        c1.execute('select * from blrbaptist')
-    if hosp==14:
-        hosp='kauvery'
-        c1.execute('select * from kauvery')
-    if hosp==15:
-        hosp='mallya'
-        c1.execute('select * from mallya')
-    else:
-        print('input invalid!')
-        exit()
-    print("1.Book an Appointment")
-    print("2.Go back")
-    print()
-    x=int(print("Choose an option:"))
-    if(x==1):
+    while(int(hosp)>0 and int(hosp)<16):
+        print("When done, press 0 to book an appointment or anything else to go back")
+        c1.execute("select srno from hospitals")
+        s = c1.fetchone()
+        c1.execute("select name from hospitals")
+        place = c1.fetchall()
+        for p in place:
+            c1.execute("select * from hospitals where srno=+"s"+ and name=+"place"+")
+            record = c1.fetchall()
+            if len(record)>0:
+                for x in record:
+                    print(x)
+     if hosp==0:
         patient_mode()
-    if(x==2):
-        hospitals()
-    else:
-        print("Invalid input!")
-        exit()
+     else:
+        main()
         
 def patient_mode():        
       p_name=input('Enter Patient Name:')
