@@ -1,4 +1,5 @@
 from sys import exit
+import datetime
 import mysql.connector as sql
 import pickle
 conn=sql.connect(host='localhost',user='root',passwd='amaatra',database='project')
@@ -82,12 +83,12 @@ c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 
 conn.commit()
 
 
-def patient_mode():
+def hospitals():
     c1.execute('select * from hospital')
     r = c1.fetchall()
     for i in r:
         print(i)
-    hosp=int(input("Choose a hospital to view details (1-15):"))
+    global hosp=int(input("Choose a hospital to view details (1-15):"))
     if hosp==1:
         hosp='manipal'
         c1.execute('select * from manipal')
@@ -141,15 +142,28 @@ def patient_mode():
     print()
     x=int(print("Choose an option:"))
     if(x==1):
+        patient_mode()
+    if(x==2):
+        hospitals()
+    else:
+        print("Invalid input!")
+        exit()
+        
+def patient_mode():        
       p_name=input('Enter Patient Name:')
       p_age=int(input('Enter Age:'))
       p_problems=input('Enter the services requested:')
       p_phono=int(input('Enter Phone number:'))
+      p_datetime=eval(input('Enter appointment date and time in dd-mm-yy hh:mm:00 xm format'))
       p_hospital=hosp
-      sql_insert="insert into patient_details values(""'"+p_name+"',"+str(p_age)+",'"+p_problems+"',"+str(p_phono)+"',"+p_hospital+")"
+      sql_insert="insert into patient_details(Name, Age, Services, Number) values(""'"+p_name+"',"+str(p_age)+",'"+p_problems+"',"+str(p_phono)+"',"+p_hospital+")"
       c1.execute(sql_insert)
-      print('SUCCESSFULLY REGISTERED')
       conn.commit()
+      c1.execute("insert into patient_details(Timing) values(convert(datetime, p_datetime, 5)")
+      conn.commit()
+      print('SUCCESSFULLY REGISTERED')
+      print('Your appointment(s):')
+      c1.execute("select * from patient_details where Number=p_phono")
 
 def admin_mode():
     print("1.Add hospital")
@@ -170,7 +184,7 @@ def main():
     print('3.Exit')
     choice=int(input('ENTER YOUR CHOICE:'))
     if choice==1:
-        paitenit_mode()
+        hospitals()
     if choice==2:
         admin_mode()
     else:
