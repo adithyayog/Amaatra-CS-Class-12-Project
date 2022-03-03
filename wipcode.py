@@ -12,11 +12,11 @@ print('---------------------------------------------')
 print("COVID-19 PATIENT MANAGEMENT SYSTEM")
 print('---------------------------------------------')
 
-c1.execute('create table patient_details(Name varchar(30), Age int, Services varchar(100), Number varchar(15), Timing date')
+c1.execute('create table patient_details(Name varchar(30), Age int, Hospital varchar(30), Services varchar(100), Number varchar(15), Timing date')
 conn.commit()
-c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone Number varchar(15))
+c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15))
 conn.commit()
-c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone Number varchar(15))
+c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone_Number varchar(15))
 conn.commit()
 
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
@@ -87,7 +87,7 @@ c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 
 conn.commit()
 
 def hospitals():
-    c1.execute('select * from hospitals')
+    c1.execute('select * from hospitals group by area')
     r = c1.fetchall()
     for i in r:
         print(i)
@@ -137,9 +137,10 @@ def admin_mode():
         print("5.Add worker")
         print("6.Remove worker")
         print("7.View hospitals")
-        print("8.View doctors")
-        print("9.View workers")
-        print("10.Go back")
+        print("8.View Patients")
+        print("9.View doctors")
+        print("10.View workers")
+        print("11.Go back")
         ch = int(input("Enter choice"))
         if ch==1:
             name=str(input("Enter Hospital name"))
@@ -147,6 +148,82 @@ def admin_mode():
             area=str(input("Enter Hospital area"))
             c1.execute("insert into hospitals values("+ "'" + name +"'," + "'" + location + "'," + "'" + area + "'" +")")
             conn.commit()
+            contact_no=str(input("Enter Contact Number:"))
+            no_beds=str(input("Enter number of beds available:"))
+            
+            conn.commit()
+            print("Successfully Registered")
+           
+           
+        elif ch==2:
+           
+           
+        elif ch==3:
+           d_name=input('Enter Doctor Name:')
+           d_age=int(input('Enter Age:'))
+           d_hospital=str(input('Enter hospital:'))
+           d_department=input('Enter the Department:')
+           d_phono=int(input('Enter Phone number:'))
+           sql_insert="insert into doctor_details values(""'"+d_name+"',"+str(d_age)+",'+"d_hospital"+","+"+d_department+"',"+str(d_phono)+")"
+           c1.execute(sql_insert)
+           print('successfully registered')
+           conn.commit()
+        elif ch==4:
+           w_name=input('Enter Worker Name:')
+           w_age=int(input('Enter Age:'))
+           w_hospital=str(input('Enter hospital:'))
+           workname=input('Enter the type of work:')
+           w_phono=int(input('Enter Phone number:'))
+           sql_insert="insert into doctor_details values(""'"+w_name+"',"+str(d_age)+",'+"w_hospital"+","+"+workname+"',"+str(w_phono)+")"
+           c1.execute(sql_insert)
+           print('successfully registered')
+           conn.commit()
+        elif ch==5:
+           removeit=str(input("Enter phone number of doctor to remove"))
+           c1.execute("count(*) from doctor_details where Phone_Number=+"d_phono"")
+           num = c1.fetchall()
+           if num>0:
+               c1.execute("select * from doctor_details where Phone_Number=+"d_phono"")
+               r=c1.fetachall()
+               for x in r:
+                   print(x)
+               confirm = print("Confirm deletion of record (Y/N)?")
+               if confirm=='Y':
+                   c1.execute("delete * from doctor_details where Phone_Number=+"d_phono"")
+               else:
+                   admin_mode()
+           else:
+               print("Error! No matching records found.")
+        elif ch==6:
+           removeit=str(input("Enter phone number of worker to remove"))
+           c1.execute("count(*) from worker_details where Phone_Number=+"w_phono"")
+           num = c1.fetchall()
+           if num>0:
+               c1.execute("select * from worker_details where Phone_Number=+"w_phono"")
+               r=c1.fetachall()
+               for x in r:
+                   print(x)
+               confirm = print("Confirm deletion of record (Y/N)?")
+               if confirm=='Y':
+                   c1.execute("delete * from worker_details where Phone_Number=+"w_phono"")
+                   conn.commit()
+               else:
+                   admin_mode()
+           else:
+               print("Error! No matching records found.")
+        elif ch==7:
+           hospitals()
+        elif ch==8:
+           c1.execute("select * from patient_details group by hospital")
+        elif ch==9:
+           c1.execute("select * from doctor_details group by hospital")
+        elif ch==10:
+           c1.execute("select * from worker_details group by hospital")
+        elif ch==11:
+           main()
+        else:
+           print("Invalid input!")
+           exit()
     else:
        print("Invalid input!")
        exit()
