@@ -190,7 +190,7 @@ def welcome():
             for row in readit:
                 if row == [us1, pwd1]:
                     print("login successful")
-                    mains()
+                    main()
                 else:
                     print('Wrong username and/or password')
                     welcome()
@@ -201,7 +201,6 @@ def welcome():
             writeit=csv.writer(f)
             writeit.writerow([us1, pwd1])
             welcome()
-    if choice==3:
+    else choice==3:
         exit()
-
 welcome()
