@@ -14,6 +14,10 @@ print('---------------------------------------------')
 
 c1.execute('create table patient_details(Name varchar(30), Age int, Services varchar(100), Number varchar(15), Timing date')
 conn.commit()
+c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone Number varchar(15))
+conn.commit()
+c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone Number varchar(15))
+conn.commit()
 
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
 conn.commit()
@@ -124,17 +128,30 @@ def patient_mode():
       main()
 
 def admin_mode():
-    print("1.Add hospital")
-    print("2.Remove hospital")
-    print("3.Alter hospital data")
-    ch = int(input("Enter choice"))
-    if ch==1:
-        name=str(input("Enter Hospital name"))
-        location=str(input("Enter Hospital Location"))
-        area=str(input("Enter Hospital area"))
-        c1.execute("insert into hospitals values("+ "'" + name +"'," + "'" + location + "'," + "'" + area + "'" +")")
-        conn.commit()
+    ch=0
+    while(int(ch)>=0 and int(ch)<=10):
+        print("1.Add hospital")
+        print("2.Remove hospital")
+        print("3.Add doctor")
+        print("4.Remove doctor")
+        print("5.Add worker")
+        print("6.Remove worker")
+        print("7.View hospitals")
+        print("8.View doctors")
+        print("9.View workers")
+        print("10.Go back")
+        ch = int(input("Enter choice"))
+        if ch==1:
+            name=str(input("Enter Hospital name"))
+            location=str(input("Enter Hospital Location"))
+            area=str(input("Enter Hospital area"))
+            c1.execute("insert into hospitals values("+ "'" + name +"'," + "'" + location + "'," + "'" + area + "'" +")")
+            conn.commit()
+    else:
+       print("Invalid input!")
+       exit()
 
+key=False
 def main():
     print("successfully connected") 
     print('1.List Hospitals (Patient Mode)')
@@ -144,7 +161,11 @@ def main():
     if choice==1:
         hospitals()
     if choice==2:
-        admin_mode()
+        if key=True:
+            admin_mode()
+        else:
+            print("ACCESS DENIED! Redirecting...")
+            main()
     else:
         exit()
         
@@ -156,23 +177,29 @@ def welcome():
     choice=int(input("ENTER YOUR CHOICE:"))
     if choice==1:
         with open("logindata.csv", "r") as f:
-            us1=str(input("enter user name:"))
-            pwd1=str(input("enter the password:"))
+            us1=str(input("Enter username:"))
+            pwd1=str(input("Enter the password:"))
+            auth=str(input("Enter administrator autentication key (ignore if patient):")
             readit=csv.reader(f)
             for row in readit:
                 if row == [us1, pwd1]:
                     print("login successful")
+                    if auth == key:
+                        global key == True
                     main()
                 else:
                     print('Wrong username and/or password')
                     welcome()
-    if choice==2:
+    elif choice==2:
         with open("logindata.csv", "a") as f:
             us1=str(input("enter user name:"))
             pwd1=str(input("enter the password:"))
             writeit=csv.writer(f)
             writeit.writerow([us1, pwd1])
             welcome()
-    else choice==3:
+    elif choice==3:
         exit()
+    else:
+        print("Invalid Input! Redirecting....")
+        welcome()             
 welcome()
