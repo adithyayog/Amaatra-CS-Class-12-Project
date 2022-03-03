@@ -2,6 +2,7 @@ from sys import exit
 import datetime
 import mysql.connector as sql
 import pickle
+import csv
 conn=sql.connect(host='localhost',user='root',passwd='amaatra',database='project')
 if conn.is_connected():
     print('successfully connected')
