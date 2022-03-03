@@ -148,6 +148,45 @@ def main():
     else:
         exit()
         
+key='jfktn4runr1nf893kk'
+global auth
+def main():
+    print("successfully connected") 
+    print('1.List Hospitals (Patient Mode)')
+    print('2.Register Hospital (Admin Mode)')
+    print('3.Exit')
+    choice=int(input('ENTER YOUR CHOICE:'))
+    if choice==1:
+        hospitals()
+    if choice==2:
+        if auth==1:
+            admin_mode()
+        else:
+            print("ACCESS DENIED! Redirecting...")
+            main()
+    else:
+        exit()
+        
+key='jfktn4runr1nf893kk'
+l=[]
+def main():
+    print("successfully connected") 
+    print('1.List Hospitals (Patient Mode)')
+    print('2.Register Hospital (Admin Mode)')
+    print('3.Exit')
+    choice=int(input('ENTER YOUR CHOICE:'))
+    if choice==1:
+        hospitals()
+    if choice==2:
+        if key in l:
+            l.clear()
+            admin_mode()
+        else:
+            print("ACCESS DENIED! Redirecting...")
+            main()
+    else:
+        exit()
+        
 def welcome():
     print('WELCOME!')
     print("1.LOGIN")
@@ -158,13 +197,13 @@ def welcome():
         with open("logindata.csv", "r") as f:
             us1=str(input("Enter username:"))
             pwd1=str(input("Enter the password:"))
-            auth=str(input("Enter administrator autentication key (ignore if patient):")
+            auth=str(input("Enter administrator authentication key (ignore if patient):"))
             readit=csv.reader(f)
             for row in readit:
                 if row == [us1, pwd1]:
                     print("login successful")
                     if auth == key:
-                        global key == True
+                        l.append(key)
                     main()
                 else:
                     print('Wrong username and/or password')
