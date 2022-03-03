@@ -12,6 +12,7 @@ print("COVID-19 PATIENT MANAGEMENT SYSTEM")
 print('---------------------------------------------')
 
 c1.execute('create table patient_details(Name varchar(30), Age int, Services varchar(100), Number varchar(15), Timing date')
+conn.commit()
 
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
 conn.commit()
@@ -79,7 +80,6 @@ conn.commit()
 
 c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 7000, 10000, 1200, 1000)")
 conn.commit()
-
 
 def hospitals():
     c1.execute('select * from hospital')
@@ -157,11 +157,13 @@ def patient_mode():
       sql_insert="insert into patient_details(Name, Age, Services, Number) values(""'"+p_name+"',"+str(p_age)+",'"+p_problems+"',"+str(p_phono)+"',"+p_hospital+")"
       c1.execute(sql_insert)
       conn.commit()
-      c1.execute("insert into patient_details(Timing) values(convert(datetime, p_datetime, 5)")
+      c1.execute("insert into patient_details("Timing") values(convert("datetime"+","+ "p_datetime"+","+ "5")")
       conn.commit()
       print('SUCCESSFULLY REGISTERED')
       print('Your appointment(s):')
       c1.execute("select * from patient_details where Number=p_phono")
+      print("Redirecting...")
+      main()
 
 def admin_mode():
     print("1.Add hospital")
