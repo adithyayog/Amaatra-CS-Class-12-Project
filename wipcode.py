@@ -243,7 +243,7 @@ def admin_mode():
         elif ch==2:
            removeit=str(input("Enter Name of hospital to remove from list"))
            c1.execute("count(*) from hospitals where name=(%s)",(removeit))
-           num = c1.fetchall()
+           num = len(c1.fetchall())
            if num>0:
                c1.execute("select * from hospitals where name=(%s)",(removeit))
                r=c1.fetachall()
@@ -269,7 +269,7 @@ def admin_mode():
         elif ch==4:
            d_phono=str(input("Enter phone number of doctor to remove"))
            c1.execute("count(*) from doctor_details where Phone_Number=(%s)",(d_phono))
-           num = c1.fetchall()
+           num = len(c1.fetchall())
            if num>0:
                c1.execute("select * from doctor_details where Phone_Number=(%s)",(d_phono))
                r=c1.fetachall()
