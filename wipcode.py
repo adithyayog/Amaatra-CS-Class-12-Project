@@ -16,8 +16,6 @@ c1.execute('create table patient_details(Name varchar(30), Age int, Hospital var
 conn.commit()
 c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15)')
 conn.commit()
-c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone_Number varchar(15)')
-conn.commit()
 
 c1.execute('create table hospitals(srno int, name varchar(50), location varchar(50), area varchar(50))')
 conn.commit()
@@ -241,8 +239,7 @@ def admin_mode():
 
             ask=input('enter if you want to repeat')
             if ask=='y':
-                admin_mode()
-                      
+                admin_mode()                     
         elif ch==2:
            removeit=str(input("Enter Name of hospital to remove from list"))
            c1.execute("count(*) from hospitals where name=(%s)",(removeit))
@@ -255,6 +252,7 @@ def admin_mode():
                confirm = print("Confirm deletion of record (Y/N)?")
                if confirm=='Y':
                    c1.execute("delete * from hospital where name=(%s)",(removeit))
+                   conn.commit()
                else:
                    admin_mode()
            else:
@@ -266,8 +264,8 @@ def admin_mode():
            d_department=input('Enter the Department:')
            d_phono=int(input('Enter Phone number:'))
            c1.execute("insert into doctor_details values(%s, %s, %s, %s, %s)",(d_name, d_age, d_hospital, d_department, d_phono))
-           print('successfully registered')
            conn.commit()
+           print('successfully registered')
         elif ch==4:
            d_phono=str(input("Enter phone number of doctor to remove"))
            c1.execute("count(*) from doctor_details where Phone_Number=(%s)",(d_phono))
@@ -280,6 +278,7 @@ def admin_mode():
                confirm = print("Confirm deletion of record (Y/N)?")
                if confirm=='Y':
                    c1.execute("delete * from doctor_details where Phone_Number=(%s)",(d_phono))
+                   conn.commit()
                else:
                    admin_mode()
            else:
