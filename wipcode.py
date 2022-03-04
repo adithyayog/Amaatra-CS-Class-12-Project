@@ -87,27 +87,33 @@ c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 
 conn.commit()
 
 def hospitals():
-    c1.execute('select * from hospitals group by area')
+    j=1
+    c1.execute('select name, location, area from hospitals order by area asc')
     r = c1.fetchall()
+    dictt={}
     for i in r:
-        print(i)
-    global hosp=int(input("Choose a hospital to view details (1-15):"))
-    while(int(hosp)>0 and int(hosp)<16):
-        print("When done, press 0 to book an appointment or anything else to go back")
-        c1.execute("select srno from hospitals")
-        s = c1.fetchone()
-        c1.execute("select name from hospitals")
-        place = c1.fetchall()
-        for p in place:
-            c1.execute("select * from hospitals where srno=+"s"+ and name=+"place"+")
-            record = c1.fetchall()
-            if len(record)>0:
-                for x in record:
-                    print(x)
-     if hosp==0:
-        patient_mode()
-     else:
-        main()
+        print(j,' - ',i)
+        dictt[j]=i[0]
+        j+=1
+        
+    global hosp
+    hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
+    if(int(hosp)>0 and int(hosp)<j+1):
+        c1.execute("select * from hospitals where name="+"'"+dictt[hosp]+"'")
+        record = c1.fetchall()
+        if len(record)>0:
+            for x in record:
+                print(x)
+    action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
+    def Action():
+        if action==1:
+            patient_mode()
+        elif(action==2):
+            main()
+        else:
+            print('ERROR!: ENTERED VALUE NOT RECOGNISED')
+            Action()
+    Action()
         
 def patient_mode():        
       p_name=input('Enter Patient Name:')
