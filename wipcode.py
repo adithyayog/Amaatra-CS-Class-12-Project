@@ -127,45 +127,6 @@ def patient_mode():
       c1.execute("select * from patient_details where Number=p_phono")
       print("Redirecting...")
       main()
-
-
-
-key=False
-def main():
-    print("successfully connected") 
-    print('1.List Hospitals (Patient Mode)')
-    print('2.Register Hospital (Admin Mode)')
-    print('3.Exit')
-    choice=int(input('ENTER YOUR CHOICE:'))
-    if choice==1:
-        hospitals()
-    if choice==2:
-        if key=True:
-            admin_mode()
-        else:
-            print("ACCESS DENIED! Redirecting...")
-            main()
-    else:
-        exit()
-        
-key='jfktn4runr1nf893kk'
-global auth
-def main():
-    print("successfully connected") 
-    print('1.List Hospitals (Patient Mode)')
-    print('2.Register Hospital (Admin Mode)')
-    print('3.Exit')
-    choice=int(input('ENTER YOUR CHOICE:'))
-    if choice==1:
-        hospitals()
-    if choice==2:
-        if auth==1:
-            admin_mode()
-        else:
-            print("ACCESS DENIED! Redirecting...")
-            main()
-    else:
-        exit()
         
 key='jfktn4runr1nf893kk'
 l=[]
