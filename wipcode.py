@@ -121,18 +121,190 @@ def patient_mode():
       p_hospital=str(input("Enter hospial name from list")
       p_problems=input('Enter the services requested:')
       p_phono=int(input('Enter Phone number:'))
-      p_datetime=eval(input('Enter appointment date and time in dd-mm-yy hh:mm:00 xm format'))
+      p_datetime=eval(input('Enter appointment date and time in YYMMDD hh:mm:00 xm format'))
       p_hospital=hosp
-      sql_insert="insert into patient_details(Name, Age, Hospital, Services, Number) values(""'"+p_name+"',"+str(p_age)+",'+",'+p_hospital+","+"+p_problems+"',"+str(p_phono)")"
-      c1.execute(sql_insert)
+      c1.execute("insert into patient_details(Name, Age, Hospital, Services, Number) values(%s, %s, %s, %s, %s)",(p_name, p_age, p_hospital, p_problems, p_phono))
       conn.commit()
-      c1.execute("insert into patient_details("Timing") values(convert("datetime"+","+ "p_datetime"+","+ "5")")
+      c1.execute("insert into patient_details(Timing) values(%s)",(p_datetime))
       conn.commit()
       print('SUCCESSFULLY REGISTERED')
       print('Your appointment(s):')
       c1.execute("select * from patient_details where Number=p_phono")
       print("Redirecting...")
       main()
+    
+def admin_mode():
+    ch=0
+    while(int(ch)>=0 and int(ch)<=10):
+        print("1.Add hospital")
+        print("2.Remove hospital")
+        print("3.Add doctor")
+        print("4.Remove doctor")
+        print("5.View hospitals")
+        print("6.View Patients")
+        print("7.View doctors")
+        print("8.Go back")
+        ch = int(input("Enter choice"))
+        if ch==1:
+            print('General Services')
+            print('-----x-----x-----x-----x-----x-----x-----x-----')
+            name=str(input("Enter Hospital name : "))
+            sub_table_name=name.replace(' ','')
+            hospital.append(sub_table_name)
+            location=str(input("Enter Hospital Location : "))
+            area=str(input("Enter Hospital area : "))
+            print('-----x-----x-----x-----x-----x-----x-----x-----')
+            Contact=str(input("Enter the Contact Number or Helpline Number : "))
+            consult_cost=int(input("Enter the Cost for General Consulatation"))
+            Beds=int(input('Enter the number of Beds Available : '))
+            Beds_cost=float(input('Enter the cost of a Bed : '))
+            o2=str(input('Enter Yes/No for the availability of Oxygen : '))
+            amb=int(input("Enter the cost of Ambulance Services : "))
+            Cov_vaccine=str(input("Enter the Covid vaccines seperated by comma(,) if available : "))
+            print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
+            print('Radiology and Scans')
+            print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
+            
+            def ct():
+                global ct_cost,ct
+                ct=str(input("Enter if CT Scans are Available : "))
+                ct_cost=0
+                if ct in ('yes', 'Yes', 'YES', 'y'):
+                    ct="Yes"
+                    ct_cost=float(input("Enter the cost of a CT SCAN : "))
+                elif ct in ('no', 'No', 'NO', 'n'):
+                    ct="No"
+                    ct_cost='N/A'
+                else:
+                    Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                    ct()
+            def mri():
+                global mri_cost,mri
+                mri=str(input("Enter if MRI SCAN are Available : "))
+                mri_cost=0
+                if mri in ('yes', 'Yes', 'YES', 'y'):
+                    mri="Yes"
+                    mri_cost=float(input("Enter the cost of a MRI SCAN : "))
+                elif mri in ('no', 'No', 'NO', 'n'):
+                    mri="No"
+                    mri_cost="N/A"
+                else:
+                    Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                    mri()
+            def cov():
+                global cov_cost,cov
+                cov=str(input("Enter if COVID TEST are Available : "))
+                cov_cost=0
+                if cov in ('yes', 'Yes', 'YES', 'y'):
+                    cov="Yes"
+                    cov_cost=float(input("Enter the cost of a COVID TEST : "))
+                elif cov in ('no', 'No', 'NO', 'n'):
+                    cov="No"
+                    cov_cost="N/A"
+                else:
+                    Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                    cov()
+            def xray():
+                global xray_cost,xray
+                xray=str(input("Enter if X-RAY SCAN are Available : "))
+                xray_cost=0
+                if xray in ('yes', 'Yes', 'YES', 'y'):
+                    xray="Yes"
+                    xray_cost=float(input("Enter the cost of a X-RAY SCAN : "))
+                elif xray in ('no', 'No', 'NO', 'n'):
+                    xray="No"
+                    xray_cost="N/A"
+                else:
+                    Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                    xray()
+            ct()
+            mri()
+            cov()
+            xray()
+            
+            for i in range(1,2):
+                global maintablecount
+                c1.execute("insert into hospitals values("+ "'" +str(maintablecount)+"', '"+ name +"'," + "'" + location + "'," + "'" + area + "'" +")")
+                maintablecount+=1
+                c1.execute('create table '+ sub_table_name+'(srno int, data_name varchar(255), data varchar(255))')
+            x={Contact:'Contact Details', consult_cost:'Consultation Cost', Beds:'Beds Availability', Beds_cost:'Cost of Beds', o2:'Oxygen Availability', amb:'Ambulance Service Cost', Cov_vaccine:'Covid Vaccines Available', ct: 'CT SCAN Availibility', ct_cost:'Cost of CT SCAN', mri:'MRI SCAN Availability', mri_cost:'Cost of MRI SCAN', cov:'COVID TEST Availability', cov_cost:'Cost of COVID TEST', xray:'X-RAY SCAN Availability', xray_cost:'Cost of X-RAY SCAN'}
+            count=1
+            for key,value in x.items():
+                c1.execute("insert into "+sub_table_name+' values( '+'"'+str(count)+ '","'+str(value)+'","'+str(key)+'")')
+                count+=1
+            conn.commit()
+            print('Updating Data',end='')
+            for i in range(15):
+                print('.',end='')
+                time.sleep(1)
+            print('Data Successfully Updated')
+
+            ask=input('enter if you want to repeat')
+            if ask=='y':
+                admin_mode()
+                      
+        elif ch==2:
+           removeit=str(input("Enter Name of hospital to remove from list"))
+           c1.execute("count(*) from hospitals where name=(%s)",(removeit))
+           num = c1.fetchall()
+           if num>0:
+               c1.execute("select * from hospitals where name=(%s)",(removeit))
+               r=c1.fetachall()
+               for x in r:
+                   print(x)
+               confirm = print("Confirm deletion of record (Y/N)?")
+               if confirm=='Y':
+                   c1.execute("delete * from hospital where name=(%s)",(removeit))
+               else:
+                   admin_mode()
+           else:
+               print("Error! No matching records found.")           
+        elif ch==3:
+           d_name=input('Enter Doctor Name:')
+           d_age=int(input('Enter Age:'))
+           d_hospital=str(input('Enter hospital:'))
+           d_department=input('Enter the Department:')
+           d_phono=int(input('Enter Phone number:'))
+           c1.execute("insert into doctor_details values(%s, %s, %s, %s, %s)",(d_name, d_age, d_hospital, d_department, d_phono))
+           print('successfully registered')
+           conn.commit()
+        elif ch==4:
+           d_phono=str(input("Enter phone number of doctor to remove"))
+           c1.execute("count(*) from doctor_details where Phone_Number=(%s)",(d_phono))
+           num = c1.fetchall()
+           if num>0:
+               c1.execute("select * from doctor_details where Phone_Number=(%s)",(d_phono))
+               r=c1.fetachall()
+               for x in r:
+                   print(x)
+               confirm = print("Confirm deletion of record (Y/N)?")
+               if confirm=='Y':
+                   c1.execute("delete * from doctor_details where Phone_Number=(%s)",(d_phono))
+               else:
+                   admin_mode()
+           else:
+               print("Error! No matching records found.")
+        elif ch==5:
+           hospitals()
+        elif ch==6:
+           c1.execute("select * from patient_details group by hospital")
+           r=c1.fetchall()
+           for x in r:
+               print(x)
+        elif ch==7:
+           c1.execute("select * from doctor_details group by hospital")
+           r=c1.fetchall()
+           for x in r:
+               print(x)
+        elif ch==8:
+           main()
+        else:
+           print("Invalid input!")
+           exit()
+    else:
+       print("Invalid input!")
+       exit()
+
         
 key='jfktn4runr1nf893kk'
 l=[]
