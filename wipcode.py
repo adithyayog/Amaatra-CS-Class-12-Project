@@ -98,7 +98,7 @@ def hospitals():
         j+=1
         
     global hosp
-    hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
+    hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))
     if(int(hosp)>0 and int(hosp)<j+1):
         c1.execute("select * from hospitals where name="+"'"+dictt[hosp]+"'")
         record = c1.fetchall()
@@ -114,7 +114,7 @@ def hospitals():
         else:
             print('ERROR!: ENTERED VALUE NOT RECOGNISED')
             Action()
-    Action()
+    Action()#NO BUGS TILL HERE
         
 def patient_mode():        
       p_name=input('Enter Patient Name:')
