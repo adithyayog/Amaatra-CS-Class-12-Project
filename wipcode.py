@@ -86,6 +86,35 @@ if ('patient_details' in isthere):
 
     c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 7000, 10000, 1200, 1000)")
     conn.commit()
+    c1.execute("insert into sakra values('080-4969-4969',200,12000, 'Yes', 3000, 1200, 'Covaxin, Sputnik', 10000, 15000, 1500, 1200)")
+    conn.commit()
+    c1.execute("insert into columbia values('074061 066688', 200, 7000, 'Yes', 2500, 1200, 'Covaxin, Covidshield,Sputnik', 7500, 11000, 1100, 11000)")
+    conn.commit()
+    c1.execute("insert into narayana values('180 0309 0309', 700, 5000, 'Yes', 1500, 1200, 'Covaxin, Covidshield,Sputnik', 6500, 9000, 800, 800)")
+    conn.commit()
+    c1.execute("insert into blossom values('08108 08108', 100, 3500, 'Yes', 1500, 1200, 'Covaxin',5500, 8700, 800, 600)")
+    conn.commit()
+    c1.execute("insert into fortis values('96633 67253', 400, 7000, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 8000, 11000, 1100, 1200)")
+    conn.commit()
+    c1.execute("insert into apollo values('080 4612 4444', 400, 8000, 'Yes', 2500, 1200, 'Covaxin, Covidshield,Sputnik', 7000, 10000, 1000, 1100)")
+    conn.commit()
+    c1.execute("insert into aster values('080 4342 0100', 500, 8500, 'Yes', 2200, 1200, 'Covaxin,Sputnik', 9000, 12000, 1150, 1200)")
+    conn.commit()
+    c1.execute("insert into sparsh values('080 6122 2200', 200, 7000, 'Yes',1800, 1200, 'Covaxin', 8000, 10500, 1000, 950)")
+    conn.commit()
+    c1.execute("insert into bgs values('080 2625 5555', 350, 7500, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 8600, 10000, 1100, 1000)")
+    conn.commit()
+    c1.execute("insert into sagar values('080 6955 5555', 200, 6000, 'Yes', 2000, 1200, 'Covaxin, Covidshield,', 6500, 9000, 800, 900)")
+    conn.commit()
+    c1.execute("insert into ramaiah values('080 2360 9999', 400, 7000, 'Yes', 1700, 1200, 'Covaxin, Covidshield', 7500, 10000, 900, 1000)")
+    conn.commit()
+    c1.execute("insert into blrbaptist values('080 2202 4700', 300, 4500, 'Yes', 1000, 1200, 'Covaxin', 5000,6000, 800, 500)")
+    conn.commit()
+    c1.execute("insert into kauvery values('080 6801 6801', 300, 5000, 'Yes', 1500, 1200, 'Covaxin', 5500, 70000, 900, 700)")
+    conn.commit()
+    c1.execute("insert into mallya values('080 6869 7979', 300, 5000, 'Yes', 1200, 1200, 'Covaxin', 6500, 8000, 9000, 650)")
+    conn.commit()
+
 
 def hospitals():
     j=1
@@ -95,16 +124,60 @@ def hospitals():
     for i in r:
         print(j,' - ',i)
         dictt[j]=i[0]
-        j+=1
-        
+        j+=1        
     global hosp
     hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))
     if(int(hosp)>0 and int(hosp)<j+1):
-        c1.execute("select * from hospitals where name="+"'"+dictt[hosp]+"'")
-        record = c1.fetchall()
-        if len(record)>0:
-            for x in record:
-                print(x)
+        hosp=int(input("Choose a hospital to view details (1-15):"))
+        if hosp==1:
+            hosp='manipal'
+            c1.execute('select * from manipal')
+        elif hosp==2:
+            hosp='sakra'
+            c1.execute('select * from sakra')
+        elif hosp==3:
+            hosp='columbia'
+            c1.execute('select * from columbia')
+        elif hosp==4:
+            hosp='narayana'
+            c1.execute('select * from narayana')
+        elif hosp==5:
+            hosp='blossom'
+            c1.execute('select * from blossom')
+        elif hosp==6:
+            hosp='fortis'
+            c1.execute('select * from fortis')
+        elif hosp==7:
+            hosp='apollo'
+            c1.execute('select * from apollo')
+        elif hosp==8:
+            hosp='aster'
+            c1.execute('select * from aster')
+        elif hosp==9:
+            hosp='sparsh'
+            c1.execute('select * from sparsh')
+        elif hosp==10:
+            hosp='bgs'
+            c1.execute('select * from bgs')
+        elif hosp==11:
+            hosp='sagar'
+            c1.execute('select * from sagar')
+        elif hosp==12:
+            hosp='ramaiah'
+            c1.execute('select * from ramaiah')
+        elif hosp==13:
+            hosp='blrbaptist'
+            c1.execute('select * from blrbaptist')
+        elif hosp==14:
+            hosp='kauvery'
+            c1.execute('select * from kauvery')
+        elif hosp==15:
+            hosp='mallya'
+            c1.execute('select * from mallya')
+    else:
+        print("Input Invalid!")
+        hospitals()
+        
     action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
     def Action():
         if action==1:
@@ -124,13 +197,13 @@ def patient_mode():
       p_phono=int(input('Enter Phone number:'))
       p_datetime=eval(input('Enter appointment date and time in YYMMDD hh:mm:00 xm format'))
       p_hospital=hosp
-      c1.execute("insert into patient_details(Name, Age, Hospital, Services, Number) values(%s, %s, %s, %s, %s)",(p_name, p_age, p_hospital, p_problems, p_phono))
+      c1.execute("insert into patient_details(Name, Age, Hospital, Services, Number) values(%s, %s, %s, %s, %s)",(p_name, p_age, p_hospital, p_problems, p_phono,))
       conn.commit()
       c1.execute("insert into patient_details(Timing) values(%s)",(p_datetime))
       conn.commit()
       print('SUCCESSFULLY REGISTERED')
       print('Your appointment(s):')
-      c1.execute("select * from patient_details where Number=p_phono")
+      c1.execute("select * from patient_details where Number=%s",(p_phono,))
       print("Redirecting...")
       main()
     
