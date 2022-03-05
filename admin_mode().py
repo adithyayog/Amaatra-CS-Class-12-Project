@@ -142,38 +142,48 @@ def mallya():
         conn.commit()
         m+=1
 #-----X-----X-----X-----X-----X-----X-----X-----
+#17.5
+def beauty(j):
+    for i in range(4):
+        print('#',end='')
+        time.sleep(0.1)
+    print(j,end='')
+#-----X-----X-----X-----X-----X-----X-----X-----
 #18        
 def hospital_database():
     manipal()
-    print('Fetching Database',end="")
+    print('Fetching Database : \n0.00%',end='')
     sakra()
-    print('.',end='')
+    beauty('7%')
     columbia()
-    print('.',end='')
+    beauty('14%')
     narayana()
-    print('.',end='')
+    beauty('22%')
     blossom()
-    print('.',end='')
+    beauty('30%')
     fortis()
-    print('.',end='')
+    beauty('38%')
     apollo()
-    print('.',end='')
+    beauty('47%')
     aster()
-    print('.',end='')
+    beauty('56%')
     sparsh()
-    print('.',end='')
+    beauty('63%')
     bgs()
-    print('.',end='')
+    beauty('70%')
     sagar()
-    print('.',end='')
+    beauty('79%')
     ramaiah()
-    print('.',end='')
+    beauty('86%')
     blrbaptist()
-    print('.',end='')
+    beauty('92%')
     kauvery()
-    print('.',end='')
+    beauty('97%')
     mallya()
-    print('.',end='')
+    beauty('100%')
+    print('')
+    print('Successfully Fetched Database')
+    print('===============================================')
 #-----X-----X-----X-----X-----X-----X-----X-----
 #19
 def ct():
@@ -182,7 +192,7 @@ def ct():
             ct_cost=0
             if ct in ('yes', 'Yes', 'YES', 'y'):
                 ct="Yes"
-                ct_cost=float(input("Enter the cost of a CT SCAN : "))
+                ct_cost=str(input("Enter the cost of a CT SCAN : "))
             elif ct in ('no', 'No', 'NO', 'n'):
                 ct="No"
                 ct_cost='N/A'
@@ -197,7 +207,7 @@ def mri():
             mri_cost=0
             if mri in ('yes', 'Yes', 'YES', 'y'):
                 mri="Yes"
-                mri_cost=float(input("Enter the cost of a MRI SCAN : "))
+                mri_cost=str(input("Enter the cost of a MRI SCAN : "))
             elif mri in ('no', 'No', 'NO', 'n'):
                 mri="No"
                 mri_cost="N/A"
@@ -212,7 +222,7 @@ def cov():
             cov_cost=0
             if cov in ('yes', 'Yes', 'YES', 'y'):
                 cov="Yes"
-                cov_cost=float(input("Enter the cost of a COVID TEST : "))
+                cov_cost=str(input("Enter the cost of a COVID TEST : "))
             elif cov in ('no', 'No', 'NO', 'n'):
                 cov="No"
                 cov_cost="N/A"
@@ -227,7 +237,7 @@ def xray():
             xray_cost=0
             if xray in ('yes', 'Yes', 'YES', 'y'):
                 xray="Yes"
-                xray_cost=float(input("Enter the cost of a X-RAY SCAN : "))
+                xray_cost=str(input("Enter the cost of a X-RAY SCAN : "))
             elif xray in ('no', 'No', 'NO', 'n'):
                 xray="No"
                 xray_cost="N/A"
@@ -236,85 +246,93 @@ def xray():
                 xray()                
 #-----X-----X-----X-----X-----X-----X-----X-----
 #23
+def ask():
+    ask=input('enter if you want to repeat')
+    if ask=='y'or'yes'or'YES'or'Yes'or'Y':
+        add_hospital()
+    elif ask=='n'or'no'or'NO'or'No'or'N':
+        admin_mode()
+    else:
+        print('ERROR: ENTER ONLY YES OR NO')
+#-----X-----X-----X-----X-----X-----X-----X-----        
+#24
 def add_hospital():
     print('General Services')
-        print('-----x-----x-----x-----x-----x-----x-----x-----')
-        name=str(input("Enter Hospital name : "))
-        sub_table_name=name.replace(' ','')
-        hospital[sub_table_name]=name
-        location=str(input("Enter Hospital Location : "))
-        area=str(input("Enter Hospital area : "))
-        print('-----x-----x-----x-----x-----x-----x-----x-----')
-        Contact=str(input("Enter the Contact Number or Helpline Number : "))
-        consult_cost=int(input("Enter the Cost for General Consulatation"))
-        Beds=int(input('Enter the number of Beds Available : '))
-        Beds_cost=float(input('Enter the cost of a Bed : '))
-        o2=str(input('Enter Yes/No for the availability of Oxygen : '))
-        amb=int(input("Enter the cost of Ambulance Services : "))
-        Cov_vaccine=str(input("Enter the Covid vaccines seperated by comma(,) if available : "))
-        print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
-        print('Radiology and Scans')
-        print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
-        ct()
-        mri()
-        cov()
-        xray()
+    print('-----x-----x-----x-----x-----x-----x-----x-----')
+    name=str(input("Enter Hospital name : "))
+    sub_table_name=name.replace(' ','')
+    hospital[sub_table_name]=name
+    location=str(input("Enter Hospital Location : "))
+    area=str(input("Enter Hospital area : "))
+    print('-----x-----x-----x-----x-----x-----x-----x-----')
+    Contact=str(input("Enter the Contact Number or Helpline Number : "))
+    consult_cost=str(input("Enter the Cost for General Consulatation"))
+    Beds=str(input('Enter the number of Beds Available : '))
+    Beds_cost=str(input('Enter the cost of a Bed : '))
+    o2=str(input('Enter Yes/No for the availability of Oxygen : '))
+    amb=str(input("Enter the cost of Ambulance Services : "))
+    Cov_vaccine=str(input("Enter the Covid vaccines seperated by comma(,) if available : "))
+    print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
+    print('Radiology and Scans')
+    print('-----x-----x-----x-----x-----x-----x-----x-----x-----')
+    ct()
+    mri()
+    cov()
+    xray()
         
-        for i in range(1,2):
-            global maintablecount
-            c1.execute("insert into hospitals values("+ "'" +str(maintablecount)+"', '"+ name +"'," + "'" + location + "'," + "'" + area + "'" +")")
-            conn.commit()
-            maintablecount+=1
-            c1.execute('create table '+ sub_table_name+'(srno int, data_name varchar(255), data varchar(255))')
-            conn.commit()
-        x={Contact:'Contact Details', consult_cost:'Consultation Cost', Beds:'Beds Availability', Beds_cost:'Cost of Beds', o2:'Oxygen Availability', amb:'Ambulance Service Cost', Cov_vaccine:'Covid Vaccines Available', ct: 'CT SCAN Availibility', ct_cost:'Cost of CT SCAN', mri:'MRI SCAN Availability', mri_cost:'Cost of MRI SCAN', cov:'COVID TEST Availability', cov_cost:'Cost of COVID TEST', xray:'X-RAY SCAN Availability', xray_cost:'Cost of X-RAY SCAN'}
-        count=1
-        for key,value in x.items():
-            c1.execute("insert into "+sub_table_name+' values( '+'"'+str(count)+ '","'+str(value)+'","'+str(key)+'")')
-            conn.commit()
-            count+=1
-        print('Updating Data',end='')
-        for i in range(15):
-            print('.',end='')
-            time.sleep(1)
-        print('Data Successfully Updated')
+    for i in range(1,2):
+        global maintablecount
+        c1.execute("insert into hospitals values("+ "'" +str(maintablecount)+"', '"+ name +"'," + "'" + location + "'," + "'" + area + "'" +")")
+        conn.commit()
+        maintablecount+=1
+        c1.execute('create table '+ sub_table_name+'(srno int, data_name varchar(255), data varchar(255))')
+        conn.commit()
+    x={Contact:'Contact Details', consult_cost:'Consultation Cost', Beds:'Beds Availability', Beds_cost:'Cost of Beds', o2:'Oxygen Availability', amb:'Ambulance Service Cost', Cov_vaccine:'Covid Vaccines Available', ct: 'CT SCAN Availibility', ct_cost:'Cost of CT SCAN', mri:'MRI SCAN Availability', mri_cost:'Cost of MRI SCAN', cov:'COVID TEST Availability', cov_cost:'Cost of COVID TEST', xray:'X-RAY SCAN Availability', xray_cost:'Cost of X-RAY SCAN'}
+    count=1
+    for key,value in x.items():
+        c1.execute("insert into "+sub_table_name+' values( '+'"'+str(count)+ '","'+str(value)+'","'+str(key)+'")')
+        conn.commit()
+        count+=1
+    print('Updating Data',end='')
+    for i in range(15):
+        print('.',end='')
+        time.sleep(1)
+    print('Data Successfully Updated')
+    ask()
 
-        ask=input('enter if you want to repeat')
-        if ask=='y':
-            admin_mode()
 #-----X-----X-----X-----X-----X-----X-----X-----
-#24
+#25
 def recover():
     global hospital_name
-        recover=input('Enter Yes to continue or No to Cancel deletion : ')
-        if recover in ['Yes','YES','yes','y','Y']:
-            print('DELETING TABLE ',hospital_name)
-            c1.execute('delete from hospitals where name='+"'"+hospital_name+"'")
-            conn.commit()
-            c1.execute('drop table '+sub_table_name(hospital_name))
-            conn.commit()
-            print('Deleting.',end='')
-            for i in range(15):
-                print('.',end='')
-                time.sleep(0.75)
-            print('')
-            print('Succesfully Deleted',hospital_name)
-            admin_mode()
-        elif recover in ['no','NO','No','N','n']:
-            print('You have cancelled deletion')
-            admin_mode()
-        else:
-            print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
-            recover()
+    recover=input('Enter Yes to continue or No to Cancel deletion : ')
+    if recover in ['Yes','YES','yes','y','Y']:
+        print('DELETING TABLE ',hospital_name)
+        c1.execute('delete from hospitals where name='+"'"+hospital_name+"'")
+        conn.commit()
+        c1.execute('drop table '+sub_table_name(hospital_name))
+        conn.commit()
+        print('Deleting.',end='')
+        for i in range(15):
+            print('.',end='')
+            time.sleep(0.75)
+        print('')
+        print('Succesfully Deleted',hospital_name)
+        admin_mode()
+    elif recover in ['no','NO','No','N','n']:
+        print('You have cancelled deletion')
+        admin_mode()
+    else:
+        print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
+        recover()
 #-----X-----X-----X-----X-----X-----X-----X-----            
-#25
+#26
 def remove_hospital():
     global hospital_name
     hospital_name=input('Enter the name of the Hospital to be REMOVED PERMANENTLY')
     print('The Hospital entered will be deleted PERMANENTLY with no means to recover data')
     recover()            
 #-----X-----X-----X-----X-----X-----X-----X-----    
-#26
+#27
 def update_hospital():
     global hospital_name
     hospital_name=input('Enter the name of the Hospital for which you want to update the data')
@@ -413,7 +431,7 @@ def update_hospital():
         conn.commit()
         print('Successfully Updated Cost of X-RAY SCAN')  
 #-----X-----X-----X-----X-----X-----X-----X-----        
-#27        
+#28        
 def doctor_add():
      d_name=input('Enter Doctor Name:')
      d_age=int(input('Enter Age:'))
@@ -424,7 +442,7 @@ def doctor_add():
      conn.commit()
      print('successfully registered')
 #-----X-----X-----X-----X-----X-----X-----X-----
-#28    
+#29    
 def recover_doctor():
         recover_doctor=input('Enter Yes to continue or No to Cancel deletion : ')
         if recover_doctor in ['Yes','YES','yes','y','Y']:
@@ -445,27 +463,27 @@ def recover_doctor():
             print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
             recover_doctor()
 #-----X-----X-----X-----X-----X-----X-----X-----            
-#29
+#30
 def doctor_remove():
     name_d=input('Enter Doctor Name to be removed(First+Last) :')
     print('The Doctor records entered will be deleted PERMANENTLY with no means to recover data')
     recover_doctor()
 #-----X-----X-----X-----X-----X-----X-----X-----            
-#30
+#31
 def view_doctor():
     c1.execute("select * from doctor_details group by hospital")
     r=c1.fetchall()
     for x in r:
         print(x)
 #-----X-----X-----X-----X-----X-----X-----X-----                
-#31                
+#32                
 def view_patients():
     c1.execute("select * from patient_details group by hospital")
     r=c1.fetchall()
     for x in r:
         print(x)     
 #-----X-----X-----X-----X-----X-----X-----X-----        
-#32        
+#33        
 def hospital_details_deeper():
             global hosp
             hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
@@ -480,7 +498,7 @@ def hospital_details_deeper():
                 print('ERROR : Hospital Entered Not Recognised - Check Spelling and Re-Enter Hospital Name')
                 hospital_details_deeper()
 #-----X-----X-----X-----X-----X-----X-----X-----                
-#33                
+#34                
 def hospitals():
     j=1
     c1.execute('select name, location, area from hospitals order by area asc')
@@ -492,7 +510,7 @@ def hospitals():
         j+=1
     hospital_details_deeper()   
 #-----X-----X-----X-----X-----X-----X-----X-----
-#34
+#35
 def Appointments():
     action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
     def Action():
@@ -505,7 +523,7 @@ def Appointments():
             Action()
     Action()
 #-----X-----X-----X-----X-----X-----X-----X-----
-#35
+#36
 def admin_mode():
     print("1.Add hospital")
     print("2.Remove hospital")
