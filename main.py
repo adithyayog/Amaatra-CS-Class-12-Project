@@ -138,7 +138,7 @@ def main():
         
     global hosp
     hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))
-    c1.execute('select * from '+hosp)
+    c1.execute('select * from '+dictt[hosp])
     action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
     def Action():
         if action==1:
