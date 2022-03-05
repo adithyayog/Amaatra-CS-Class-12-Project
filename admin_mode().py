@@ -104,8 +104,6 @@ c1.execute("insert into apollo values('080 4612 4444', 400, 8000, 'Yes', 2500, 1
 conn.commit()
 c1.execute("insert into aster values('080 4342 0100', 500, 8500, 'Yes', 2200, 1200, 'Covaxin,Sputnik', 9000, 12000, 1150, 1200)")
 conn.commit()
-c1.execute("insert into apollo values('080 4612 4444', 400, 8000, 'Yes', 2500, 1200, 'Covaxin, Covidshield,Sputnik', 7000, 10000, 1000, 1100)")
-conn.commit()
 c1.execute("insert into sparsh values('080 6122 2200', 200, 7000, 'Yes',1800, 1200, 'Covaxin', 8000, 10500, 1000, 950)")
 conn.commit()
 c1.execute("insert into bgs values('080 2625 5555', 350, 7500, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 8600, 10000, 1100, 1000)")
