@@ -124,3 +124,33 @@ def main():
         admin_mode()
     else:
         exit()
+
+        
+  def hospitals():
+    j=1
+    c1.execute('select name, location, area from hospitals order by area asc')
+    r = c1.fetchall()
+    dictt={}
+    for i in r:
+        print(j,' - ',i)
+        dictt[j]=i[0]
+        j+=1
+        
+    global hosp
+    hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))
+    if(int(hosp)>0 and int(hosp)<j+1):
+        c1.execute("select * from hospitals where name="+"'"+dictt[hosp]+"'")
+        record = c1.fetchall()
+        if len(record)>0:
+            for x in record:
+                print(x)
+    action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
+    def Action():
+        if action==1:
+            patient_mode()
+        elif(action==2):
+            main()
+        else:
+            print('ERROR!: ENTERED VALUE NOT RECOGNISED')
+            Action()
+    Action()#NO BUGS TILL HERE
