@@ -10,6 +10,15 @@ print('---------------------------------------------')
 print("COVID-19 PATIENT MANAGEMENT SYSTEM")
 print('---------------------------------------------')
 
+hospital={'manipal':'Manipal Hospital', 'sakra':'Sakra Hospital', 'columbia':'Columbia Asia', 'narayana':'Narayana Hrudhalaya', 'blossom':'Blossom Hospital', 'fortis':'Fortis Clinic', 'apollo':'Apollo Hospital', 'aster':'Aster CMI', 'sparsh':'Sparsh Hospital', 'bgs':"BGS Gleneagles Hospital", 'sagar':"Sagar Hospital", 'ramaiah':"Ramaiah Memorial Hospital", 'blrbaptist':"Bangalore Baptist Hospital", 'kauvery':"Kauvery Hospital", 'mallya':"Mallya Hospital"}
+def sub_table_name(hospital_name):
+    for key,value in hospital.items():
+        global hospital_name
+        if value==hospital_name:
+            return key
+        else:
+            return 'Hospital not found'
+
 def welcome():
     print('WELCOME!')
     print("1.LOGIN")
@@ -137,8 +146,9 @@ def main():
         j+=1
         
     global hosp
+    global hospital
     hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))
-    c1.execute('select * from '+dictt[hosp])
+    c1.execute('select * from '+sub_table_name(dictt[hosp]))
     action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
     def Action():
         if action==1:
