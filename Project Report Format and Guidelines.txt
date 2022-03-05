@@ -1,0 +1,60 @@
+HEADINGS: 
+  -->Georgia
+  -->Centre Allignment
+  -->Bold
+  -->14
+  
+CONTENT:
+  -->Georgia
+  -->Justify Allignment
+  -->Normal (not Bold)
+  -->12
+  -->1.5 Line Spacing
+  
+BULLETS AND NUMBERING:
+  -->No Numbers to be used for numbering
+  -->Only Bullet Points
+
+Must be Spiral Bound
+  -->Front: Transparent cover
+  -->Back: Grey cover
+  -->Must be completely printed
+  -->No pen or whitener
+ 
+TEAM MEMBERS:
+  -->All team members except you
+  -->Full Name
+  -->Register Number
+  -->Email ID
+
+PROJECT DEFINITION:
+  -->350 to 400 Words
+ 
+Reason For Choosing This Project
+
+OBJECTIVE:
+  -->4 to 5 points
+  -->Must be Bullet Points
+  
+SYSTEM REQUIREMENTS:
+  -->Don't change any information
+  -->Retain what's given in the Document
+
+SOURCE CODE:
+  -->Just copy paste the source code
+  -->Don't justify the source code
+  -->Font has to be Georgia
+  
+LIMITATIONS:
+  -->List all limitations you can come up with
+  -->If the examiner comes up with a limitation you did not list, then marks will be cut
+
+OUTPUT SCREEN:
+  -->Screenshots for input
+  -->Screenshots for output
+  -->all screenshots must be accompanied with a one-line explanation of the screenshot
+  -->Only one screenshot 
+  
+BIBLIOGRAPHY:
+  -->Sumita Arora both 11th and 12th textbooks must be mentioned
+  -->Wherever we referenced the code from on the internet
