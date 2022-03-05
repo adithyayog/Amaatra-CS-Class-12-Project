@@ -56,68 +56,193 @@ conn.commit()
 c1.execute('insert into hospitals values(15, "Mallya Hospital", "Cubbon Park", "Jayanagar")')
 conn.commit()
 
-c1.execute('create table manipal(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table manipal(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table sakra(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table sakra(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table columbia(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table columbia(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table narayana(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table narayana(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table blossom(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table blossom(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table fortis(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table fortis(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table apollo(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table apollo(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table aster(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table aster(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table sparsh(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table sparsh(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table bgs(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table bgs(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table sagar(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table sagar(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table ramaiah(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table ramaiah(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table blrbaptist(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table blrbaptist(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table kauvery(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table kauvery(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
-c1.execute('create table mallya(Contact_No char(15), No_beds_available int, Cost_of_bed int, Oxygen_available char(3), ambulance int, covid_test_cost int, vaccines_available varchar(30), CT_scan_price int, MRI_scan_price int, XRAY_price int, general_consultation_price int)')
+c1.execute('create table mallya(srno varchar(225), data_name varchar(225), data varchar(225))' )
 conn.commit()
 
+manipald={'Contact Details':'1800-102-5555', 'Consultation Cost':'Rs. 1000', 'Beds Availability':'300', 'Cost of Beds':'Rs. 8000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2000', 'Covid Vaccines Available':'Covaxin, Covishield', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 7000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 10000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1200'}
+sakrad={'Contact Details':'080-4969-4969', 'Consultation Cost':'Rs. 1200', 'Beds Availability':'200', 'Cost of Beds':'Rs. 12000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 3000', 'Covid Vaccines Available':'Covaxin, Covishield, Sputnik', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 10000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 15000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 800', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1500'}
+columbiad={'Contact Details':'074061 066688', 'Consultation Cost':'Rs. 1100', 'Beds Availability':'200', 'Cost of Beds':'Rs. 7000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2500', 'Covid Vaccines Available':'Covaxin, Covishield, Sputnik', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 7500', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 11000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1100'}
+narayanad={'Contact Details':'180-0309-0309', 'Consultation Cost':'Rs. 800', 'Beds Availability':'700', 'Cost of Beds':'Rs. 5000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1500', 'Covid Vaccines Available':'Covaxin, Covishield, Sputnik', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 6500', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 9000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 800', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 800'}
+blossomd={'Contact Details':'08108 08108', 'Consultation Cost':'Rs. 600', 'Beds Availability':'100', 'Cost of Beds':'Rs. 3500', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1500', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 800'}
+fortisd={'Contact Details':'96633 67253', 'Consultation Cost':'Rs. 1200', 'Beds Availability':'400', 'Cost of Beds':'Rs. 7000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2000', 'Covid Vaccines Available':'Covaxin, Covishield', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 8000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 11000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1100'}
+apollod={'Contact Details':'080-4612-4444', 'Consultation Cost':'Rs. 1100', 'Beds Availability':'400', 'Cost of Beds':'Rs. 8000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2500', 'Covid Vaccines Available':'Covaxin, Covishield, Sputnik', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 8000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 11000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1200'}
+asterd={'Contact Details':'080-4342-0100', 'Consultation Cost':'Rs. 1200', 'Beds Availability':'500', 'Cost of Beds':'Rs. 8500', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2200', 'Covid Vaccines Available':'Covaxin, Sputnik', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 9000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 12000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1150'}
+sparshd={'Contact Details':'080-6122-2200', 'Consultation Cost':'Rs. 950', 'Beds Availability':'200', 'Cost of Beds':'Rs. 7000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1800', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 8000', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 10500', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1000'}
+bgsd={'Contact Details':'080-2625-5555', 'Consultation Cost':'Rs. 1000', 'Beds Availability':'350', 'Cost of Beds':'Rs. 7500', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2000', 'Covid Vaccines Available':'Covaxin, Covishield', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 8600', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 10000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 1100'}
+sagard={'Contact Details':'080-6955-5555', 'Consultation Cost':'Rs. 900', 'Beds Availability':'200', 'Cost of Beds':'Rs. 6000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 2000', 'Covid Vaccines Available':'Covaxin, Covishield', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 6500', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 9000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 800'}
+ramaiahd={'Contact Details':'080-2360-9999', 'Consultation Cost':'Rs. 1000', 'Beds Availability':'400', 'Cost of Beds':'Rs. 7000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1700', 'Covid Vaccines Available':'Covaxin, Covishield', 'CT SCAN Availibility':'Yes', 'Cost of CT SCAN':'Rs. 7500', 'MRI SCAN Availability':'Yes', 'Cost of MRI SCAN':'Rs. 10000', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 900'}
+blrbaptistd={'Contact Details':'080-2202-4700', 'Consultation Cost':'Rs. 500', 'Beds Availability':'300', 'Cost of Beds':'Rs. 4500', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1000', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 700'}
+kauveryd={'Contact Details':'080-6801-6801', 'Consultation Cost':'Rs. 700', 'Beds Availability':'300', 'Cost of Beds':'Rs. 5000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1500', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 900'}
+mallyad={'Contact Details':'080-6869-7979', 'Consultation Cost':'Rs. 650', 'Beds Availability':'300', 'Cost of Beds':'Rs. 5000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1200', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 700'}
 
-c1.execute("insert into manipal values('1800-102-5555', 300, 8000, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 7000, 10000, 1200, 1000)")
-conn.commit()
-c1.execute("insert into sakra values('080-4969-4969',200,12000, 'Yes', 3000, 1200, 'Covaxin, Sputnik', 10000, 15000, 1500, 1200)")
-conn.commit()
-c1.execute("insert into columbia values('074061 066688', 200, 7000, 'Yes', 2500, 1200, 'Covaxin, Covidshield,Sputnik', 7500, 11000, 1100, 11000)")
-conn.commit()
-c1.execute("insert into narayana values('180 0309 0309', 700, 5000, 'Yes', 1500, 1200, 'Covaxin, Covidshield,Sputnik', 6500, 9000, 800, 800)")
-conn.commit()
-c1.execute("insert into blossom values('08108 08108', 100, 3500, 'Yes', 1500, 1200, 'Covaxin',5500, 8700, 800, 600)")
-conn.commit()
-c1.execute("insert into fortis values('96633 67253', 400, 7000, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 8000, 11000, 1100, 1200)")
-conn.commit()
-c1.execute("insert into apollo values('080 4612 4444', 400, 8000, 'Yes', 2500, 1200, 'Covaxin, Covidshield,Sputnik', 7000, 10000, 1000, 1100)")
-conn.commit()
-c1.execute("insert into aster values('080 4342 0100', 500, 8500, 'Yes', 2200, 1200, 'Covaxin,Sputnik', 9000, 12000, 1150, 1200)")
-conn.commit()
-c1.execute("insert into sparsh values('080 6122 2200', 200, 7000, 'Yes',1800, 1200, 'Covaxin', 8000, 10500, 1000, 950)")
-conn.commit()
-c1.execute("insert into bgs values('080 2625 5555', 350, 7500, 'Yes', 2000, 1200, 'Covaxin, Covidshield', 8600, 10000, 1100, 1000)")
-conn.commit()
-c1.execute("insert into sagar values('080 6955 5555', 200, 6000, 'Yes', 2000, 1200, 'Covaxin, Covidshield,', 6500, 9000, 800, 900)")
-conn.commit()
-c1.execute("insert into ramaiah values('080 2360 9999', 400, 7000, 'Yes', 1700, 1200, 'Covaxin, Covidshield', 7500, 10000, 900, 1000)")
-conn.commit()
-c1.execute("insert into blrbaptist values('080 2202 4700', 300, 4500, 'Yes', 1000, 1200, 'Covaxin', 5000,6000, 800, 500)")
-conn.commit()
-c1.execute("insert into kauvery values('080 6801 6801', 300, 5000, 'Yes', 1500, 1200, 'Covaxin', 5500, 70000, 900, 700)")
-conn.commit()
-c1.execute("insert into mallya values('080 6869 7979', 300, 5000, 'Yes', 1200, 1200, 'Covaxin', 6500, 8000, 9000, 650)")
-conn.commit()
+
+    
+def manipal():
+    m=1
+    for key,value in manipald.items():
+        c1.execute('insert into manipal values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def sakra():
+    m=1
+    for key,value in sakrad.items():
+        c1.execute('insert into sakra values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def columbia():
+    m=1
+    for key,value in columbiad.items():
+        c1.execute('insert into columbia values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def narayana():
+    m=1
+    for key,value in narayanad.items():
+        c1.execute('insert into narayana values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def blossom():
+    m=1
+    for key,value in blossomd.items():
+        c1.execute('insert into blossom values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def fortis():
+    m=1
+    for key,value in fortisd.items():
+        c1.execute('insert into fortis values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def apollo():
+    m=1
+    for key,value in apollod.items():
+        c1.execute('insert into apollo values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def aster():
+    m=1
+    for key,value in asterd.items():
+        c1.execute('insert into aster values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def sparsh():
+    m=1
+    for key,value in sparshd.items():
+        c1.execute('insert into sparsh values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def bgs():
+    m=1
+    for key,value in bgsd.items():
+        c1.execute('insert into bgs values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def sagar():
+    m=1
+    for key,value in sagard.items():
+        c1.execute('insert into sagar values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def ramaiah():
+    m=1
+    for key,value in ramaiahd.items():
+        c1.execute('insert into ramaiah values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def blrbaptist():
+    m=1
+    for key,value in blrbaptistd.items():
+        c1.execute('insert into blrbaptist values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def kauvery():
+    m=1
+    for key,value in kauveryd.items():
+        c1.execute('insert into kauvery values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+        
+def mallya():
+    m=1
+    for key,value in mallyad.items():
+        c1.execute('insert into mallya values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+
+def hospital_database():
+    manipal()
+    print('Fetching Database',end="")
+    sakra()
+    print('.',end='')
+    columbia()
+    print('.',end='')
+    narayana()
+    print('.',end='')
+    blossom()
+    print('.',end='')
+    fortis()
+    print('.',end='')
+    apollo()
+    print('.',end='')
+    aster()
+    print('.',end='')
+    sparsh()
+    print('.',end='')
+    bgs()
+    print('.',end='')
+    sagar()
+    print('.',end='')
+    ramaiah()
+    print('.',end='')
+    blrbaptist()
+    print('.',end='')
+    kauvery()
+    print('.',end='')
+    mallya()
+    print('.',end='')
+
+hospital_database()
 
 
 def sub_table_name():
