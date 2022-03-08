@@ -577,7 +577,7 @@ def admin_mode():
     else:
         print('ERROR!: UNRECOGNISED VALUE - ENTER VALUE 1-9')
         
- key='jfktn4runr1nf893kk'
+key='jfktn4runr1nf893kk'
 l=[]
 def main():
     global mode
@@ -645,5 +645,3 @@ def welcome():
         print("Invalid Input! Redirecting....")
         welcome()             
 welcome()
-
-        admin_mode() 
