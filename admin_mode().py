@@ -484,22 +484,11 @@ def view_patients():
         print(x)     
 #-----X-----X-----X-----X-----X-----X-----X-----        
 #33        
-def hospital_details_deeper():
-            global hosp
-            hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
-            if(int(hosp)>0 and int(hosp)<j+1):
-                c1.execute("select * from "+sub_table_name(dictt[hosp]))
-                record = c1.fetchall()
-                if len(record)>0:
-                    for x in record:
-                        print(x)
-                admin_mode()
-            else:
-                print('ERROR : Hospital Entered Not Recognised - Check Spelling and Re-Enter Hospital Name')
-                hospital_details_deeper()
+
 #-----X-----X-----X-----X-----X-----X-----X-----                
 #34                
 def hospitals():
+    global j
     j=1
     c1.execute('select name, location, area from hospitals order by area asc')
     r = c1.fetchall()
@@ -508,7 +497,26 @@ def hospitals():
         print(j,' - ',i)
         dictt[j]=i[0]
         j+=1
-    hospital_details_deeper()   
+    def hospital_details_deeper():
+        global hosp
+        global j
+        hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
+        if(int(hosp)>0 and int(hosp)<j+1):
+            c1.execute("select * from "+sub_table_name(dictt[hosp]))
+            record = c1.fetchall()
+            if len(record)>0:
+                for x in record:
+                    print(x)
+            input('Hit Any Key To Return To Admin Mode')
+            print('')
+            print('=====X=====X=====X=====X=====X=====X=====X=====X=====')
+            print('')
+            print('ADMINISTRATOR MODE')
+            admin_mode()
+        else:
+            print('ERROR : Hospital Entered Not Recognised - Check Spelling and Re-Enter Hospital Name')
+            hospital_details_deeper()
+    hospital_details_deeper()
 #-----X-----X-----X-----X-----X-----X-----X-----
 #35
 def Appointments():
@@ -565,7 +573,11 @@ hospital={'manipal':'Manipal Hospital', 'sakra':'Sakra Hospital', 'columbia':'Co
 maintablecount=1
 
 
-c1.execute('create table patient_details(Name varchar(30), Age int, Hospital varchar(30), Services varchar(100), Number varchar(15), Timing date)')
+c1.execute('create table patient_details(Name varchar(30), Age int, Hospital varchar(30), Services varchar(100), Number varchar(15), Timing varchar(255))')
+conn.commit()
+c1.execute('insert into patient_details values("name1", 10, "hospital1", "services1", 1800, "timing1")')
+conn.commit()
+c1.execute('insert into patient_details values("name2", 11, "hospital2", "services2", 1801, "timing2")')
 conn.commit()
 c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15))')
 conn.commit()
