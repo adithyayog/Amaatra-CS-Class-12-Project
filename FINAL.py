@@ -107,3 +107,200 @@ blrbaptistd={'Contact Details':'080-2202-4700', 'Consultation Cost':'Rs. 500', '
 kauveryd={'Contact Details':'080-6801-6801', 'Consultation Cost':'Rs. 700', 'Beds Availability':'300', 'Cost of Beds':'Rs. 5000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1500', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 900'}
 mallyad={'Contact Details':'080-6869-7979', 'Consultation Cost':'Rs. 650', 'Beds Availability':'300', 'Cost of Beds':'Rs. 5000', 'Oxygen Availability':'Yes', 'Ambulance Service Cost':'Rs. 1200', 'Covid Vaccines Available':'Covaxin', 'CT SCAN Availibility':'No', 'Cost of CT SCAN':'N/A', 'MRI SCAN Availability':'No', 'Cost of MRI SCAN':'N/A', 'COVID TEST Availability':'Yes', 'Cost of COVID TEST':'Rs. 1200', 'X-RAY SCAN Availability':'Yes', 'Cost of X-RAY SCAN':'Rs. 700'}
 
+def sub_table_name(hospital_name):
+    print(hospital_name)
+    for key,value in hospital.items():
+        if value==hospital_name:
+            return key
+def manipal():
+    m=1
+    for key,value in manipald.items():
+        c1.execute('insert into manipal values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+def sakra():
+    m=1
+    for key,value in sakrad.items():
+        c1.execute('insert into sakra values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+def columbia():
+    m=1
+    for key,value in columbiad.items():
+        c1.execute('insert into columbia values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+def narayana():
+    m=1
+    for key,value in narayanad.items():
+        c1.execute('insert into narayana values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1    
+def blossom():
+    m=1
+    for key,value in blossomd.items():
+        c1.execute('insert into blossom values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1       
+def fortis():
+    m=1
+    for key,value in fortisd.items():
+        c1.execute('insert into fortis values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1      
+def apollo():
+    m=1
+    for key,value in apollod.items():
+        c1.execute('insert into apollo values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1       
+def aster():
+    m=1
+    for key,value in asterd.items():
+        c1.execute('insert into aster values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1    
+def sparsh():
+    m=1
+    for key,value in sparshd.items():
+        c1.execute('insert into sparsh values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1   
+def bgs():
+    m=1
+    for key,value in bgsd.items():
+        c1.execute('insert into bgs values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1     
+def sagar():
+    m=1
+    for key,value in sagard.items():
+        c1.execute('insert into sagar values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1    
+def ramaiah():
+    m=1
+    for key,value in ramaiahd.items():
+        c1.execute('insert into ramaiah values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+def blrbaptist():
+    m=1
+    for key,value in blrbaptistd.items():
+        c1.execute('insert into blrbaptist values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1       
+def kauvery():
+    m=1
+    for key,value in kauveryd.items():
+        c1.execute('insert into kauvery values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1  
+def mallya():
+    m=1
+    for key,value in mallyad.items():
+        c1.execute('insert into mallya values('+str(m)+", "+"'"+key+"'"+", "+"'"+value+"'"+")")
+        conn.commit()
+        m+=1
+def beauty(j):
+    for i in range(4):
+        print('#',end='')
+        time.sleep(0.1)
+    print(j,end='')
+
+def hospital_database():
+    manipal()
+    print('Fetching Database : \n0.00%',end='')
+    sakra()
+    beauty('7%')
+    columbia()
+    beauty('14%')
+    narayana()
+    beauty('22%')
+    blossom()
+    beauty('30%')
+    fortis()
+    beauty('38%')
+    apollo()
+    beauty('47%')
+    aster()
+    beauty('56%')
+    sparsh()
+    beauty('63%')
+    bgs()
+    beauty('70%')
+    sagar()
+    beauty('79%')
+    ramaiah()
+    beauty('86%')
+    blrbaptist()
+    beauty('92%')
+    kauvery()
+    beauty('97%')
+    mallya()
+    beauty('100%')
+    print('')
+    print('Successfully Fetched Database')
+    print('===============================================')
+    
+    def ct():
+            global ct_cost,ct
+            ct=str(input("Enter if CT Scans are Available : "))
+            ct_cost=0
+            if ct in ('yes', 'Yes', 'YES', 'y'):
+                ct="Yes"
+                ct_cost=str(input("Enter the cost of a CT SCAN : "))
+            elif ct in ('no', 'No', 'NO', 'n'):
+                ct="No"
+                ct_cost='N/A'
+            else:
+                Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                ct()
+def mri():
+            global mri_cost,mri
+            mri=str(input("Enter if MRI SCAN are Available : "))
+            mri_cost=0
+            if mri in ('yes', 'Yes', 'YES', 'y'):
+                mri="Yes"
+                mri_cost=str(input("Enter the cost of a MRI SCAN : "))
+            elif mri in ('no', 'No', 'NO', 'n'):
+                mri="No"
+                mri_cost="N/A"
+            else:
+                Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                mri()
+def cov():
+            global cov_cost,cov
+            cov=str(input("Enter if COVID TEST are Available : "))
+            cov_cost=0
+            if cov in ('yes', 'Yes', 'YES', 'y'):
+                cov="Yes"
+                cov_cost=str(input("Enter the cost of a COVID TEST : "))
+            elif cov in ('no', 'No', 'NO', 'n'):
+                cov="No"
+                cov_cost="N/A"
+            else:
+                Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                cov()
+def xray():
+            global xray_cost,xray
+            xray=str(input("Enter if X-RAY SCAN are Available : "))
+            xray_cost=0
+            if xray in ('yes', 'Yes', 'YES', 'y'):
+                xray="Yes"
+                xray_cost=str(input("Enter the cost of a X-RAY SCAN : "))
+            elif xray in ('no', 'No', 'NO', 'n'):
+                xray="No"
+                xray_cost="N/A"
+            else:
+                Print("ERROR : Input Not Recognised --- Please Enter either Yes or No")
+                xray()
+                
+def ask():
+    ask=input('enter if you want to repeat')
+    if ask=='y'or'yes'or'YES'or'Yes'or'Y':
+        add_hospital()
+    elif ask=='n'or'no'or'NO'or'No'or'N':
+        admin_mode()
+    else:
+        print('ERROR: ENTER ONLY YES OR NO')
