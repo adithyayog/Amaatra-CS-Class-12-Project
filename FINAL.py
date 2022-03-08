@@ -23,8 +23,6 @@ if ('hospitals' in isthere):
     conn.commit()
     c1.execute('create table doctor_details(Name varchar(30), Age int, Hospital varchar(30), Department varchar(30), Phone_Number varchar(15))')
     conn.commit()
-    c1.execute('create table worker_details(Name varchar(30), Age int, Hospital varchar(30), workname varchar(30), Phone_Number varchar(15))')
-    conn.commit()
 
     c1.execute('create table hospitals(srno int, name varchar(250), location varchar(250), area varchar(250))')
     conn.commit()
@@ -304,3 +302,348 @@ def ask():
         admin_mode()
     else:
         print('ERROR: ENTER ONLY YES OR NO')
+
+def recover():
+    global hospital_name
+    recover=input('Enter Yes to continue or No to Cancel deletion : ')
+    if recover in ['Yes','YES','yes','y','Y']:
+        print('DELETING TABLE ',hospital_name)
+        c1.execute('delete from hospitals where name='+"'"+hospital_name+"'")
+        conn.commit()
+        c1.execute('drop table '+sub_table_name(hospital_name))
+        conn.commit()
+        print('Deleting.',end='')
+        for i in range(15):
+            print('.',end='')
+            time.sleep(0.75)
+        print('')
+        print('Succesfully Deleted',hospital_name)
+        admin_mode()
+    elif recover in ['no','NO','No','N','n']:
+        print('You have cancelled deletion')
+        admin_mode()
+    else:
+        print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
+        recover()
+def remove_hospital():
+    global hospital_name
+    hospital_name=input('Enter the name of the Hospital to be REMOVED PERMANENTLY')
+    print('The Hospital entered will be deleted PERMANENTLY with no means to recover data')
+    recover()
+def doctor_add():
+     d_name=input('Enter Doctor Name:')
+     d_age=int(input('Enter Age:'))
+     d_hospital=str(input('Enter hospital:'))
+     d_department=input('Enter the Department:')
+     d_phono=int(input('Enter Phone number:'))
+     c1.execute("insert into doctor_details values(%s, %s, %s, %s, %s)",(d_name, d_age, d_hospital, d_department, d_phono))
+     conn.commit()
+     print('successfully registered')
+def recover_doctor():
+        recover_doctor=input('Enter Yes to continue or No to Cancel deletion : ')
+        if recover_doctor in ['Yes','YES','yes','y','Y']:
+            print('DELETING Doctor Record of ',name_d)
+            c1.execute('delete from doctor_details where name='+"'"+name_d+"'")
+            conn.commit()
+            print('Deleting.',end='')
+            for i in range(15):
+                print('.',end='')
+                time.sleep(0.5)
+            print('')
+            print('Succesfully Deleted Doctor Records of ',name_d)
+            admin_mode()
+        elif recover in ['no','NO','No','N','n']:
+            print('You have cancelled deletion')
+            admin_mode()
+        else:
+            print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
+            recover_doctor()
+def recover_patient():
+        recover_patient=input('Enter Yes to continue or No to Cancel deletion : ')
+        if recover_patient in ['Yes','YES','yes','y','Y']:
+            print('DELETING Doctor Record of ',name_p)
+            c1.execute('delete from patient_details where name='+"'"+name_p+"'")
+            conn.commit()
+            print('Deleting.',end='')
+            for i in range(15):
+                print('.',end='')
+                time.sleep(0.5)
+            print('')
+            print('Succesfully Deleted Doctor Records of ',name_p)
+            admin_mode()
+        elif recover in ['no','NO','No','N','n']:
+            print('You have cancelled deletion')
+            admin_mode()
+        else:
+            print('ERROR : VALUE ENTERED NOT RECOGNISED - PLEASE ENTER ONLY YES OR NO')
+            recover_doctor()
+def doctor_remove():
+    name_d=input('Enter Doctor Name to be removed(First+Last) :')
+    print('The Doctor records entered will be deleted PERMANENTLY with no means to recover data')
+    recover_doctor()
+def patient_remove():
+    name_p=input('Enter Patient Name to be removed(First+Last) :')
+    print('The Patient records entered will be deleted PERMANENTLY with no means to recover data')
+    recover_patient()
+def view_doctor():
+    c1.execute("select * from doctor_details group by hospital")
+    r=c1.fetchall()
+    for x in r:
+        print(x)
+def view_patients():
+    c1.execute("select * from patient_details group by hospital")
+    r=c1.fetchall()
+    for x in r:
+        print(x)
+
+def hospital_details_deeper():
+            global hosp
+            hosp=int(input("Choose a hospital to view details (1-"+str(j-1)+"): "))#NO BUGS TILL HERE
+            if(int(hosp)>0 and int(hosp)<j+1):
+                c1.execute("select * from "+sub_table_name(dictt[hosp]))
+                record = c1.fetchall()
+                if len(record)>0:
+                    for x in record:
+                        print(x)
+                if mode=='a':
+                    admin_mode()
+                elif mode=='p':
+                    patient_mode()
+            else:
+                print('ERROR : Hospital Entered Not Recognised - Check Spelling and Re-Enter Hospital Name')
+                hospital_details_deeper()
+def hospitals():
+    global j
+    j=1
+    c1.execute('select name, location, area from hospitals order by area asc')
+    r = c1.fetchall()
+    global dictt
+    dictt={}
+    print("   NAME     LOCATION        AREA")
+    for i in r:
+        print(j,' - ',i)
+        dictt[j]=i[0]
+        j+=1
+    hospital_details_deeper()
+    
+def update_hospital():
+    global hospital_name
+    hospital_name=input('Enter the name of the Hospital for which you want to update the data')
+    print('1:Name \n2:Location \n3:Area \4:Contact Details \n5:Consultation Cost \n6:Beds Availability \n7:Cost Of Beds \n8:Oxygen Availability \n9: Ambulance Service Cost \n10:Covid Vaccines Availability \n11:CT SCAN Availability \n12:Cost of CT SCAN \n13: MRI SCAN Availability')
+    print('14:Cost of MRI SCAN \n15:COVID TEST Availability \n16:Cost of COVID TEST \n17:X-RAY SCAN Availability \n18:Cost of X-RAY SCAN')
+    new_name=sub_table_name(hospital_name)
+    data_name=input('Enter the numbers corresponding to the Data_Name(s) to be updated separated by comma(,)')
+    if '1' in data_name:
+        data=input('Enter the new Name :')
+        c1.execute('update hospitals set name ='+"'"+data+"'"+' where name ='+"'"+hospital_name+"'")
+        conn.commit()
+        print('Successfully Updated Name')
+    if '2' in data_name:
+        data=input('Enter the new Location :')
+        c1.execute('update hospitals set location ='+"'"+data+"'"+' where name ='+"'"+hospital_name+"'")
+        conn.commit()
+        print('Successfully Updated Location')
+    if '3' in data_name:
+        data=input('Enter the new Area :')
+        c1.execute('update hospitals set area ='+"'"+data+"'"+' where name ='+"'"+hospital_name+"'")
+        conn.commit()
+        print('Successfully Updated Area')
+    if '4' in data_name:
+        data=input('Enter the new Contact Details :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name = "Contact Details"')
+        conn.commit()
+        print('Successfully Updated Contact Details')
+    if '5' in data_name:
+        data=input('Enter the new Consultation Cost :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Consultation Cost"')
+        conn.commit()
+        print('Successfully Updated Consultation Cost')
+    if '6' in data_name:
+        data=input('Enter the new Beds Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Beds Availability"')
+        conn.commit()
+        print('Successfully Updated Beds Availability')
+    if '7' in data_name:
+        data=input('Enter the new Cost Of Beds :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Cost Of Beds"')
+        conn.commit()
+        print('Successfully Updated Cost Of Beds')
+    if '8' in data_name:
+        data=input('Enter the new Oxygen Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Oxygen Availability"')
+        conn.commit()
+        print('Successfully Updated Oxygen Availability')
+    if '9' in data_name:
+        data=input('Enter the new Ambulance Service Cost :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Ambulance Service Cost"')
+        conn.commit()
+        print('Successfully Updated Ambulance Service Cost')
+    if '10' in data_name:
+        data=input('Enter the new Covid Vaccines Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Covid Vaccines Availability"')
+        conn.commit()
+        print('Successfully Updated Covid Vaccines Availability')
+    if '11' in data_name:
+        data=input('Enter the new CT SCAN Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="CT SCAN Availability"')
+        conn.commit()
+        print('Successfully Updated CT SCAN Availability')
+    if '12' in data_name:
+        data=input('Enter the new Cost of CT SCAN :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Cost of CT SCAN"')
+        conn.commit()
+        print('Successfully Updated Cost of CT SCAN')
+    if '13' in data_name:
+        data=input('Enter the new MRI SCAN Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="MRI SCAN Availability"')
+        conn.commit()
+        print('Successfully Updated MRI SCAN Availability')
+    if '14' in data_name:
+        data=input('Enter the new Cost of MRI SCAN :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Cost of MRI SCAN"')
+        conn.commit()
+        print('Successfully Updated Cost of MRI SCAN')
+    if '15' in data_name:
+        data=input('Enter the new COVID TEST Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="COVID TEST Availability"')
+        conn.commit()
+        print('Successfully Updated COVID TEST Availability')
+    if '16' in data_name:
+        data=input('Enter the new Cost of COVID TEST :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Cost of COVID TEST"')
+        conn.commit()
+        print('Successfully Updated Cost of COVID TEST')
+    if '17' in data_name:
+        data=input('Enter the new X-RAY SCAN Availability :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="X-RAY SCAN Availability"')
+        conn.commit()
+        print('Successfully Updated X-RAY SCAN Availability')
+    if '18' in data_name:
+        data=input('Enter the new Cost of X-RAY SCAN :')
+        c1.execute('update hospitals set data ='+"'"+data+"'"+' where data_name ="Cost of X-RAY SCAN"')
+        conn.commit()
+        print('Successfully Updated Cost of X-RAY SCAN')  
+    
+def patient_mode():        
+      p_name=input('Enter Patient Name:')
+      p_age=int(input('Enter Age:'))
+      p_hospital=str(input("Enter hospial name from list"))
+      p_problems=input('Enter the services requested:')
+      p_phono=int(input('Enter Phone number:'))
+      p_datetime=eval(input('Enter appointment date and time in YYMMDD hh:mm:00 xm format'))
+      p_hospital=hosp
+      c1.execute("insert into patient_details(Name, Age, Hospital, Services, Number) values(%s, %s, %s, %s, %s)",(p_name, p_age, p_hospital, p_problems, p_phono,))
+      conn.commit()
+      c1.execute("insert into patient_details(Timing) values(%s)",(p_datetime))
+      conn.commit()
+      print('SUCCESSFULLY REGISTERED')
+      print('Your appointment(s):')
+      c1.execute("select * from patient_details where Number=%s",(p_phono,))
+      print("Redirecting...")
+      main()
+    
+def admin_mode():
+    print("1.Add hospital")
+    print("2.Remove hospital")
+    print("3.Alter hospital data")
+    print('4.Show Doctors')
+    print('5.Add Doctor')
+    print('6.Remove Doctor')
+    print('7.Show Hospitals')
+    print('8.Show Patients')
+    print('9.Delete Patients')
+    print('10.Go back')
+    ch = int(input("Enter choice"))
+    if ch==1:
+        add_hospital()
+    elif ch==2:
+        remove_hospital()
+    elif ch==3:
+        update_hospital()
+    elif ch==4:
+        view_doctor()
+    elif ch==5:
+        doctor_add()
+    elif ch==6:
+        doctor_remove()
+    elif ch==7:
+        hospitals()
+    elif ch==8:
+        view_patients()
+    elif ch==9:
+        patient_remove()
+    elif ch==9:
+        main()
+    else:
+        print('ERROR!: UNRECOGNISED VALUE - ENTER VALUE 1-9')
+        
+ key='jfktn4runr1nf893kk'
+l=[]
+def main():
+    global mode
+    print("successfully connected") 
+    print('1.Enter Patient Mode')
+    print('2.Enter Administrator Mode ')
+    print('3.Exit')
+    choice=int(input('ENTER YOUR CHOICE:'))
+    if choice==1:
+        mode='p'
+        hospitals()
+    if choice==2:
+        if key in l:
+            mode='a'
+            l.clear()
+            admin_mode()
+        else:
+            print("ACCESS DENIED! Redirecting...")
+            main()
+    else:
+        exit()
+
+def Action():
+    action=int(input('Enter 1 to book apointment or 2 to exit to main page'))
+    if action==1:
+        patient_mode()
+    elif(action==2):
+        main()
+    else:
+        print('ERROR!: ENTERED VALUE NOT RECOGNISED')
+        Action()
+    Action()
+    
+def welcome():
+    print('WELCOME!')
+    print("1.LOGIN")
+    print("2.SIGN UP")
+    print("3.EXIT")
+    choice=int(input("ENTER YOUR CHOICE:"))
+    if choice==1:
+        with open("logindata.csv", "r") as f:
+            us1=str(input("Enter username:"))
+            pwd1=str(input("Enter the password:"))
+            auth=str(input("Enter administrator authentication key (ignore if patient):"))
+            readit=csv.reader(f)
+            for row in readit:
+                if row == [us1, pwd1]:
+                    print("login successful")
+                    if auth == key:
+                        l.append(key)
+                    main()
+                else:
+                    print('Wrong username and/or password')
+                    welcome()
+    elif choice==2:
+        with open("logindata.csv", "a") as f:
+            us1=str(input("enter user name:"))
+            pwd1=str(input("enter the password:"))
+            writeit=csv.writer(f)
+            writeit.writerow([us1, pwd1])
+            welcome()
+    elif choice==3:
+        exit()
+    else:
+        print("Invalid Input! Redirecting....")
+        welcome()             
+welcome()
+
+        admin_mode() 
