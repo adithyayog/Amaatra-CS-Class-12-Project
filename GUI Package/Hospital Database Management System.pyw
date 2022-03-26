@@ -1,21 +1,27 @@
-'''
+from tkinter import *
+from tkinter import messagebox as tkmsg
+from tkinter.ttk import Progressbar as Progressbar
+from mysql.connector import connect
+import csv
+from tkinter import ttk
+
+"""
 THIS IS THE GUI VERSION OF THE HOSPITAL DATABASE MANAGEMENT SYSTEM
 DEVELOPED FOR THE CBSE GRADE 12 CLASS PRACTICAL EXAMINATION
 
 GUI DEVELOPED BY
 ADITHYA RANJITH - THE AMAATRA ACADEMY
-'''
 
-from tkinter import *
-from tkinter import messagebox as tkmsg
-from tkinter.ttk import Progressbar as Progressbar
-import mysql.connector as sql
-import csv
-from tkinter import ttk
+LOGIC DEVELOPED BY
+ADITHYA RANJITH- THE AMAATRA ACADEMY
+ADITHYA YOGESH - THE AMAATRA ACADEMY
+ADIT BASAK - THE AMAATRA ACADEMY
+"""
+
 
 # -----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----
 #  CONNECTING TO MYSQL DATABASE
-conn = sql.connect(host='localhost', user='root', passwd='amaatra', database='project')
+conn =connect (host='localhost', user='root', passwd='amaatra', database='project')
 c1 = conn.cursor()
 
 # -----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----
@@ -73,7 +79,10 @@ def show_hospital_patient():
     login.maxsize(500, 500)
     login.minsize(500, 500)
     login.title('Hospitals')
-    Label(showhosp, text='Which Hospital Do You Want To Look At ? : ', bg='#2B2B2B', fg='#A5B3C1').grid(row=0, column=0,
+    Button(showhosp, text='<Back', bg='#3C3F41', bd=0, fg='#A5B3C1', command=patient_page, width=72).grid(row=0,
+                                                                                                         column=0,
+                                                                                                         columnspan=2)
+    Label(showhosp, text='Which Hospital Do You Want To Look At ? : ', bg='#2B2B2B', fg='#A5B3C1').grid(row=1, column=0,
                                                                                                         padx=20,
                                                                                                         pady=20)
     remvar = StringVar(value='Select Hospital')
@@ -81,21 +90,20 @@ def show_hospital_patient():
     for i in hospital.values():
         listofhosp.append(str(i))
     tempvar = OptionMenu(showhosp, remvar, *listofhosp)
-    tempvar.grid(row=0, column=1, padx=10, pady=20)
+    tempvar.grid(row=1, column=1, padx=10, pady=20)
     tempvar.configure(bg='#2B2B2B', bd=0, fg='#A5B3C1', activebackground='grey')
 
     def show():
         c1.execute(f'select * from {sub_table_name(remvar.get())}')
         x = c1.fetchall()
-        j = -1
+        j = 0
         for i in x:
             j += 1
             Label(showhosp, text=i[1], padx=10, pady=5, bg='#2B2B2B', bd=0, fg='#A5B3C1').grid(row=j + 2, column=0)
             Label(showhosp, text=i[2], padx=10, pady=5, bg='#2B2B2B', bd=0, fg='#A5B3C1').grid(row=j + 2, column=1)
             if j == 15:
                 break
-
-    Button(showhosp, text='Show Information', command=show, bg='#3C3F41', fg='#A5B3C1', width=60).grid(row=1, column=0,
+    Button(showhosp, text='Show Information', command=show, bg='#3C3F41', fg='#A5B3C1', width=60).grid(row=2, column=0,
                                                                                                        columnspan=2,
                                                                                                        padx=30)
 
@@ -254,6 +262,71 @@ def patient_register_mode():
 
 
 # -----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----
+# LOGIC BEHIND ADMIN KEY
+def adminkey():
+    global adminkeylist
+
+    def back():
+        adminup.destroy()
+        admin_mode_func()
+
+    adminup = Frame(login)
+    adminup.configure(bg='#2B2B2B')
+    login.title('Update AdminKey')
+    login.geometry('590x480')
+    login.maxsize(590, 480)
+    login.minsize(590, 480)
+    adminup.grid(row=0, column=0, sticky=NSEW)
+    adminup.tkraise()
+    Button(adminup, text='<Back', bg='#3C3F41', bd=0, fg='#A5B3C1', command=back,
+           width=85).grid(row=0, column=0, columnspan=2)
+    Label(adminup, text='Admin Key Options', font=('Ariel Rounded Mt', 24, 'bold'),
+          bg='#2B2B2B', fg='#FA3232').grid(row=1, column=0, columnspan=2, pady=10)
+    print(adminkeylist)
+    message = ''
+    tx = Text(adminup, height=17, width=60, bg='#3C3F41', bd=0, fg='#A5B3C1')
+    tx.grid(row=2, column=0, columnspan=2, pady=10)
+    for i in adminkeylist:
+        message = message + i + '\n'
+    tx.insert(1.0, message)
+
+    def sub():
+        global adminkeylist
+        page = tx.get(1.0, END)
+        print(page)
+        newlist = []
+        j = ''
+        for i in page:
+            if i == '\n':
+                newlist.append(j)
+                j = ''
+            else:
+                j += i
+        print(newlist)
+        with open('adminkey.csv', 'w', newline='') as f:
+            for i in newlist:
+                if len(i)<1:
+                    continue
+                else:
+                    print(i)
+                    pencil = csv.writer(f)
+                    pencil.writerow([i])
+            f.close()
+        print(adminkeylist)
+        adminkeylist = []
+        with open('adminkey.csv', 'r') as f:
+            for i in csv.reader(f):
+                adminkeylist.append(str(i[0]))
+            f.close()
+
+        print(adminkeylist)
+
+    Button(adminup, text='update', command=sub, width=68, bg='#3C3F41', bd=0, fg='#A5B3C1').grid(row=3, column=0,
+                                                                                                 columnspan=2, padx=20,
+                                                                                                 pady=10)
+
+
+# -----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----X-----
 # LOGIC BEHIND ADMIN LOG IN
 def admin_login_mode():
     global adminusername
@@ -286,6 +359,7 @@ def admin_login_mode():
 def admin_register_mode():
     global adminusername
     global adminpassword
+    global adminkeylist
     if adminregisteradminkey.get() in adminkeylist:
         with open('hospitaladminusrpw.csv', 'r') as f:
             book = csv.reader(f)
@@ -1901,6 +1975,7 @@ def admin_mode_func():
     mb_menu = Menu(mb, tearoff=0)
     mb['menu'] = mb_menu
     mb_menu.add_command(label='Change Password', command=admin_update_pw)
+    mb_menu.add_command(label='Admin Key Options', command=adminkey)
     mb_menu.add_command(label='Log Out', command=back)
 
     Label(admin_mode, text="                                                ", bg='#2B2B2B', fg='#A5B3C1').grid(
@@ -1983,3 +2058,4 @@ def admin_mode_func():
 first_frame()
 
 login.mainloop()
+
